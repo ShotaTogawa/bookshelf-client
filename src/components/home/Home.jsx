@@ -1,8 +1,13 @@
 import React from "react";
 import classes from "./home.css";
+import Top from "./top/Top";
 
 const Home = () => {
-  return <div className="Container" style={classes.Container}></div>;
+  return (
+    <>
+      <Top />
+    </>
+  );
 };
 
 export default Home;

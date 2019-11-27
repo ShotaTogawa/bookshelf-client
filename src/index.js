@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 
+import Router from "./Router";
 import App from "./App";
 
 import { createStore, applyMiddleware, compose } from "redux";
@@ -19,7 +20,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router />
   </Provider>,
   document.getElementById("root")
 );

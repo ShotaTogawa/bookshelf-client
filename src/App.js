@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+import Signin from "./components/auth/Signin";
+import Home from "./components/home/Home";
 
 class App extends Component {
   render() {
-    return <div>Hello world</div>;
+    return <Home />;
   }
 }
 

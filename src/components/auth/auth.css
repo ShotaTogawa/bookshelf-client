@@ -1,9 +1,9 @@
 .Auth_Container {
   width: 100%;
-  background: linear-gradient(rgba(34, 36, 45, 1), rgba(34, 36, 45, 1));
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .Form_auth {

@@ -1,6 +1,5 @@
 import * as actionTypes from "./type";
 import { api } from "../api";
-import jwt from "jsonwebtoken";
 
 export const signup = formValues => async dispatch => {
   const response = await api.post("/api/signup", formValues);

@@ -9,9 +9,9 @@ const Top = () => {
       <div className="Container" style={classes.Container}>
         <div>
           <h1 className="Greeting" style={classes.Greeting}>
-            Keep your books
+            {/* Keep your books
             <br />
-            make your stories
+            make your stories */}
           </h1>
         </div>
       </div>

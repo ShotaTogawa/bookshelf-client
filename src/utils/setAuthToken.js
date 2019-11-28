@@ -1,7 +1,6 @@
 import { api } from "../api";
 
 const setAuthToken = token => {
-  console.log(token);
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {

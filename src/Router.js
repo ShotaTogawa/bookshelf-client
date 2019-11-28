@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/auth/PrivateRouter";
 
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
@@ -13,7 +14,8 @@ const Router = () => {
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/dashboard" exact component={DashBoard} />
+        <PrivateRoute path="/user/dashboard" exact component={DashBoard} />
+        <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
     </BrowserRouter>
   );

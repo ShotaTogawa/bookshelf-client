@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import classes from "./auth.css";
 import { signin } from "../../actions";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Spinner from "../../spinner/Spinner";
+import { isAuthenticated } from "./";
+
+const { user } = isAuthenticated();
 
 class Signin extends Component {
   state = {
@@ -39,7 +42,7 @@ class Signin extends Component {
     ));
 
   handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.setState({ error: [] });
     const { email, password } = this.state;
     if (this.isFormValid()) {
@@ -53,6 +56,16 @@ class Signin extends Component {
           console.log(e);
           this.setState({ loading: false });
         });
+    }
+  };
+
+  redirectUser = () => {
+    if (user) {
+      return <Redirect to="/user/dashboard" />;
+    }
+
+    if (!user) {
+      return <Redirect to="/" />;
     }
   };
 
@@ -85,6 +98,7 @@ class Signin extends Component {
     return (
       <div className="Auth_Container" style={classes.Auth_Container}>
         {this.state.loading ? <Spinner /> : this.renderForm()}
+        {this.redirectUser()}
       </div>
     );
   }

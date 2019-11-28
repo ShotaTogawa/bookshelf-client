@@ -9,13 +9,13 @@ const initialUser = {
 const user_reducer = (state = initialUser, action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_USER:
-      localStorage.setItem("jwt", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload));
       setAuthToken(action.payload.token);
       return {
         user: action.payload.user
       };
     case actionTypes.SIGNIN_USER:
-      localStorage.setItem("jwt", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
       setAuthToken(action.payload.token);
       return {
         user: action.payload.user

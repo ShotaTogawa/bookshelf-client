@@ -51,6 +51,7 @@ class Signin extends Component {
         })
         .catch(e => {
           console.log(e);
+          this.setState({ loading: false });
         });
     }
   };

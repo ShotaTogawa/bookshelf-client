@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import classes from "./auth.css";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { isAuthenticated } from ".";
 
 import { signup } from "../../actions";
 import Spinner from "../../spinner/Spinner";
+
+const { user } = isAuthenticated();
 
 class Signup extends Component {
   state = {
@@ -79,6 +82,16 @@ class Signup extends Component {
     }
   };
 
+  redirectUser = () => {
+    if (user) {
+      return <Redirect to="/user/dashboard" />;
+    }
+
+    if (!user) {
+      return <Redirect to="/sigup" />;
+    }
+  };
+
   renderForm() {
     return (
       <div className="Form_auth" style={classes.Form_auth}>
@@ -120,6 +133,7 @@ class Signup extends Component {
     return (
       <div className="Auth_Container" style={classes.Auth_Container}>
         {this.state.loading ? <Spinner /> : this.renderForm()}
+        {this.redirectUser()}
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./auth.css";
 import { signin } from "../../actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Spinner from "../../spinner/Spinner";
 
 class Signin extends Component {
@@ -9,20 +10,39 @@ class Signin extends Component {
     email: "",
     password: "",
     loading: false,
-    error: []
+    errors: []
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  isFormEmpty = ({ email, password }) => {
+    return !email.length || !password.length;
+  };
 
-  isFormValid = ({ email, password }) => email && password;
+  isFormValid = () => {
+    let errors = [];
+    let error;
+    if (this.isFormEmpty(this.state)) {
+      error = { message: "Please fill in all Fields" };
+      this.setState({ errors: errors.concat(error) });
+      return false;
+    }
+    return true;
+  };
+
+  displayErrors = errors =>
+    errors.map((error, i) => (
+      <small key={i} className="form-text alert alert-danger">
+        {error.message}
+      </small>
+    ));
 
   handleSubmit = e => {
     e.preventDefault();
     this.setState({ error: [] });
     const { email, password } = this.state;
-    if (this.isFormValid(this.state)) {
+    if (this.isFormValid()) {
       this.setState({ loading: true });
       this.props
         .signin({ email, password })
@@ -39,6 +59,7 @@ class Signin extends Component {
     return (
       <div className="Form_auth" style={classes.Form_auth}>
         <h1>Signin Form</h1>
+        {this.displayErrors(this.state.errors)}
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
@@ -54,6 +75,7 @@ class Signin extends Component {
           />
           <button type="submit">Send</button>
         </form>
+        <Link to="/signup">Not signup yet?</Link>
       </div>
     );
   }

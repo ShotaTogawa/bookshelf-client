@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import Header from "./header/Header";
 import SideMenu from "./SideMenu/SideMenu";
 
 class DashBoard extends Component {
   render() {
-    return <SideMenu />;
+    return (
+      <div>
+        <Header />
+        <SideMenu />
+      </div>
+    );
   }
 }
 

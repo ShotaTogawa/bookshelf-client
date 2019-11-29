@@ -65,7 +65,7 @@ class Signin extends Component {
     }
 
     if (!user) {
-      return <Redirect to="/sigin" />;
+      return <Redirect to="/signin" />;
     }
   };
 

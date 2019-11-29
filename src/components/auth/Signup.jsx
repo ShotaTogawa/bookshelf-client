@@ -88,7 +88,7 @@ class Signup extends Component {
     }
 
     if (!user) {
-      return <Redirect to="/sigup" />;
+      return <Redirect to="/signup" />;
     }
   };
 

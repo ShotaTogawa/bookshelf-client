@@ -36,17 +36,17 @@ class SideMenu extends Component {
   };
 
   renderMenu = () => {
-    return menus.map(menu => {
+    return menus.map((menu, i) => {
       return (
-        <ul className="menu">
+        <ul className="menu" key={i}>
           <li>
             <a href={menu.url}>
               <i className={menu.icon}></i>
               {menu.title}
             </a>
             {menu.submenus.length > 0
-              ? menu.submenus.map(submenu => (
-                  <ul>
+              ? menu.submenus.map((submenu, i) => (
+                  <ul key={i}>
                     <li>
                       <a href={submenu.url}>
                         <i className={submenu.icon}></i>

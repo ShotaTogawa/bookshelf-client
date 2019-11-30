@@ -33,7 +33,7 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-        <div className="site-name">
+        {/* <div className="site-name">
           <h1 className="desktop">BookShelf</h1>
         </div>
         <div className="bar">
@@ -42,6 +42,14 @@ class Header extends Component {
             <i className="fas fa-arrow-right"></i>
           </div>
           <div className="right-content">{this.renderRightContent()}</div>
+        </div> */}
+        <div class="ui grid">
+          <div class="left floated column">
+            <p>logo</p>
+          </div>
+          <div class="right floated column">
+            <p>signout</p>
+          </div>
         </div>
       </header>
     );

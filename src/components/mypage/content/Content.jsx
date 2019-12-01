@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-// import Table from "./table/Table";
+// import BookTable from "./table/BookTable";
 import CreateBook from "./book/CreateBook";
+import BookInfo from "./book/BookInfo";
 
 class Content extends Component {
   render() {
-    return <CreateBook />;
+    return <BookInfo />;
   }
 }
 

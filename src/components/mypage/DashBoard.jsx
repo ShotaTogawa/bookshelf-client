@@ -8,7 +8,7 @@ class DashBoard extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        {/* <Header /> */}
         {/* <div className="ui two column  grid">
           <div className="four wide column" style={{ height: "100%" }}>
             <SideMenu />
@@ -18,8 +18,7 @@ class DashBoard extends Component {
           </div>
         </div> */}
         <Grid>
-          <Grid.Column width={1}></Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <SideMenu />
           </Grid.Column>
 
@@ -27,7 +26,6 @@ class DashBoard extends Component {
             <Content />
           </Grid.Column>
         </Grid>
-        <Grid.Column width={1}></Grid.Column>
       </Fragment>
     );
   }

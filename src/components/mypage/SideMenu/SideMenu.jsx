@@ -1,22 +1,8 @@
 import React, { Component } from "react";
-
-const menus = [
-  {
-    url: "#",
-    icon: "fas fa-address-book",
-    title: "Clients",
-    submenus: [
-      { url: "#", title: "View All", icon: "fas fa-list" },
-      { url: "#", title: "Add new", icon: "fas fa-plus" }
-    ]
-  },
-  {
-    url: "#",
-    icon: "fas fa-address-book",
-    title: "Book",
-    submenus: []
-  }
-];
+import { Image } from "semantic-ui-react";
+import defaultImage from "../../assets/user.svg";
+import classes from "./sidemenu.css";
+import { menus } from "../../../utils/variables";
 
 const user = {
   name: "test",
@@ -26,8 +12,8 @@ const user = {
 class SideMenu extends Component {
   renderUser = () => {
     return (
-      <div className="user">
-        <img src={user.avatar} />
+      <div className="User" style={classes.User}>
+        <img src={defaultImage} />
         <p>
           Welcome: <span>{user.name}</span>
         </p>
@@ -38,40 +24,41 @@ class SideMenu extends Component {
   renderMenu = () => {
     return menus.map((menu, i) => {
       return (
-        <div className="ui list">
-          <div className="item">
-            <div className="content">
-              <div className="header">
-                <i className={menu.icon}></i>
-                {menu.title}
-              </div>
-              <div className="list">
-                {menu.submenus.length > 0
-                  ? menu.submenus.map((submenu, i) => (
-                      <div className="item">
-                        <div className="content">
-                          <div className="header">{submenu.title}</div>
-                        </div>
-                      </div>
-                    ))
-                  : ""}
-              </div>
-            </div>
-          </div>
-        </div>
+        <li>
+          <a href="#">
+            <i className={menu.icon}></i>
+            &ensp;{menu.title}
+          </a>
+
+          {menu.submenus.length > 0
+            ? menu.submenus.map((submenu, i) => (
+                <ul>
+                  <li>
+                    <a href={submenu.url}>
+                      <i className={submenu.icon}></i>
+                      &ensp;{submenu.title}
+                    </a>
+                  </li>
+                </ul>
+              ))
+            : ""}
+        </li>
       );
     });
   };
 
   render() {
     return (
-      <aside className="sidebar">
+      <div className="Sidebar" stlye={classes.Sidebar}>
         {this.renderUser()}
-        <div className="menu-admin">
+
+        <div className="MenuList" style={classes.MenuList}>
           <h2>Menu</h2>
-          {this.renderMenu()}
+          <ul className="Menu" style={classes.Menu}>
+            {this.renderMenu()}
+          </ul>
         </div>
-      </aside>
+      </div>
     );
   }
 }

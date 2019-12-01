@@ -50,3 +50,25 @@ export const tableHeaderRead = [
   "Evaluation",
   "Image upload"
 ];
+
+export const menus = [
+  {
+    url: "#",
+    icon: "fas fa-address-book",
+    title: "User",
+    submenus: [
+      { url: "#", title: "Status", icon: "fas fa-list" },
+      { url: "#", title: "Edit Profile", icon: "fas fa-plus" }
+    ]
+  },
+  {
+    url: "#",
+    icon: "fas fa-address-book",
+    title: "Book",
+    submenus: [
+      { url: "#", title: "Book List", icon: "fas fa-list" },
+      { url: "#", title: "Register Book", icon: "fas fa-plus" },
+      { url: "#", title: "TimeLine", icon: "fas fa-plus" }
+    ]
+  }
+];

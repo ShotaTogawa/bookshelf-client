@@ -34,7 +34,7 @@ class ShowMemo extends Component {
   };
   render() {
     return (
-      <div>
+      <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>
         {this.renderMemo()}
       </div>

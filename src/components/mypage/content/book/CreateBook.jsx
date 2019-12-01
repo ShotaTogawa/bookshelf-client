@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { bookGenres } from "../../../../utils/variables";
 import { Form, Select, Grid } from "semantic-ui-react";
+import SideMenu from "../../sidemenu/SideMenu";
 
 class CreateBook extends Component {
   renderForm = () => (
     <Grid>
-      <Grid.Column width={2}></Grid.Column>
-      <Grid.Column width={9}>
-        <h1>Register Book</h1>
+      <SideMenu />
+      <Grid.Column width={1}></Grid.Column>
+      <Grid.Column width={8} style={{ marginTop: "30px" }}>
+        <h1 style={{ textAlign: "center" }}>Register Book</h1>
         <Form>
           <Form.Field>
             <label>Book Title</label>
@@ -46,7 +48,6 @@ class CreateBook extends Component {
           </button>
         </Form>
       </Grid.Column>
-      {/* <Grid.Column width={2}></Grid.Column> */}
     </Grid>
   );
   render() {

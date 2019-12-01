@@ -96,7 +96,7 @@ export default class CounterPieChart extends PureComponent {
 
   render() {
     return (
-      <PieChart width={500} height={300}>
+      <PieChart width={370} height={245}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}

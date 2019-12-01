@@ -49,26 +49,24 @@ class SideMenu extends Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Column width={4}>
-          <div className="Sidebar" stlye={classes.Sidebar}>
-            {this.renderUser()}
+      <Grid.Column width={4}>
+        <div className="Sidebar" stlye={classes.Sidebar}>
+          {this.renderUser()}
 
-            <div className="MenuList" style={classes.MenuList}>
-              <h2>Menu</h2>
-              <ul className="Menu" style={classes.Menu}>
-                {this.renderMenu()}
-                <li>
-                  <a href="#">
-                    <i className="fas fa-sign-out-alt"></i>
-                    &ensp;Signout
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <div className="MenuList" style={classes.MenuList}>
+            <h2>Menu</h2>
+            <ul className="Menu" style={classes.Menu}>
+              {this.renderMenu()}
+              <li>
+                <a href="#">
+                  <i className="fas fa-sign-out-alt"></i>
+                  &ensp;Signout
+                </a>
+              </li>
+            </ul>
           </div>
-        </Grid.Column>
-      </Grid>
+        </div>
+      </Grid.Column>
     );
   }
 }

@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
+import SideMenu from "../../sidemenu/SideMenu";
 import {
   tableHeaderBefore,
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table as Table1, Menu, Image } from "semantic-ui-react";
+import { Table, Menu, Image, Grid } from "semantic-ui-react";
 
 const tableData = [
   {
@@ -33,60 +34,63 @@ class BookTable extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
   renderTableHeader = () => {
     return tableHeaderBefore.map(header => {
-      return <Table1.HeaderCell>{header}</Table1.HeaderCell>;
+      return <Table.HeaderCell>{header}</Table.HeaderCell>;
     });
   };
 
   renderTableData = () => {
     return tableData.map(data => {
       return (
-        <Table1.Body>
-          <Table1.Row>
-            <Table1.Cell>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
               <Image
                 src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
                 size="tiny"
               />
-            </Table1.Cell>
-            <Table1.Cell>{data.emp}</Table1.Cell>
-            <Table1.Cell>{data.a}</Table1.Cell>
-            <Table1.Cell>{data.b}</Table1.Cell>
-            <Table1.Cell>{data.c}</Table1.Cell>
-            <Table1.Cell>{data.d}</Table1.Cell>
-            <Table1.Cell>{data.e}</Table1.Cell>
-          </Table1.Row>
-        </Table1.Body>
+            </Table.Cell>
+            <Table.Cell>{data.emp}</Table.Cell>
+            <Table.Cell>{data.a}</Table.Cell>
+            <Table.Cell>{data.b}</Table.Cell>
+            <Table.Cell>{data.c}</Table.Cell>
+            <Table.Cell>{data.d}</Table.Cell>
+            <Table.Cell>{data.e}</Table.Cell>
+          </Table.Row>
+        </Table.Body>
       );
     });
   };
 
   render() {
     return (
-      <Fragment>
-        <Menu tabular>
-          <Menu.Item
-            name="Reading"
-            active={this.state.activeItem === "Reading"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Before"
-            active={this.state.activeItem === "Before"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Read"
-            active={this.state.activeItem === "Read"}
-            onClick={this.handleItemClick}
-          />
-        </Menu>
-        <Table1 basic="very">
-          <Table1.Header>
-            <Table1.Row>{this.renderTableHeader()}</Table1.Row>
-          </Table1.Header>
-          {this.renderTableData()}
-        </Table1>
-      </Fragment>
+      <Grid>
+        <SideMenu />
+        <Grid.Column width={11} style={{ marginTop: "30px" }}>
+          <Menu tabular>
+            <Menu.Item
+              name="Reading"
+              active={this.state.activeItem === "Reading"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="Before"
+              active={this.state.activeItem === "Before"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="Read"
+              active={this.state.activeItem === "Read"}
+              onClick={this.handleItemClick}
+            />
+          </Menu>
+          <Table basic="very">
+            <Table.Header>
+              <Table.Row>{this.renderTableHeader()}</Table.Row>
+            </Table.Header>
+            {this.renderTableData()}
+          </Table>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

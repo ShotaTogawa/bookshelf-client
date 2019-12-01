@@ -54,21 +54,21 @@ export const tableHeaderRead = [
 export const menus = [
   {
     url: "#",
-    icon: "fas fa-address-book",
+    icon: "fas fa-user-circle",
     title: "User",
     submenus: [
       { url: "#", title: "Status", icon: "fas fa-list" },
-      { url: "#", title: "Edit Profile", icon: "fas fa-plus" }
+      { url: "#", title: "Edit Profile", icon: "fas fa-user-edit" }
     ]
   },
   {
     url: "#",
-    icon: "fas fa-address-book",
+    icon: "fas fa-book",
     title: "Book",
     submenus: [
-      { url: "#", title: "Book List", icon: "fas fa-list" },
+      { url: "#", title: "Book List", icon: "fas fa-th-list" },
       { url: "#", title: "Register Book", icon: "fas fa-plus" },
-      { url: "#", title: "TimeLine", icon: "fas fa-plus" }
+      { url: "#", title: "TimeLine", icon: "fas fa-stream" }
     ]
   }
 ];

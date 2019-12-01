@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import defaultImage from "../../assets/user.svg";
 import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
+import { Grid } from "semantic-ui-react";
 
 const user = {
   name: "test",
@@ -48,22 +49,26 @@ class SideMenu extends Component {
 
   render() {
     return (
-      <div className="Sidebar" stlye={classes.Sidebar}>
-        {this.renderUser()}
+      <Grid>
+        <Grid.Column width={4}>
+          <div className="Sidebar" stlye={classes.Sidebar}>
+            {this.renderUser()}
 
-        <div className="MenuList" style={classes.MenuList}>
-          <h2>Menu</h2>
-          <ul className="Menu" style={classes.Menu}>
-            {this.renderMenu()}
-            <li>
-              <a href="#">
-                <i className="fas fa-address-book"></i>
-                &ensp;Signout
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+            <div className="MenuList" style={classes.MenuList}>
+              <h2>Menu</h2>
+              <ul className="Menu" style={classes.Menu}>
+                {this.renderMenu()}
+                <li>
+                  <a href="#">
+                    <i className="fas fa-sign-out-alt"></i>
+                    &ensp;Signout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

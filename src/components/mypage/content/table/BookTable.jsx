@@ -4,7 +4,7 @@ import {
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table as Table1, Menu, Image, Header } from "semantic-ui-react";
+import { Table as Table1, Menu, Image } from "semantic-ui-react";
 
 const tableData = [
   {

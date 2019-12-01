@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Image } from "semantic-ui-react";
 import defaultImage from "../../assets/user.svg";
 import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
@@ -13,7 +12,7 @@ class SideMenu extends Component {
   renderUser = () => {
     return (
       <div className="User" style={classes.User}>
-        <img src={defaultImage} />
+        <img src={defaultImage} alt={user.name} />
         <p>
           Welcome: <span>{user.name}</span>
         </p>

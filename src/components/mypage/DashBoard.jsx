@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import Header from "./header/Header";
 import SideMenu from "./sidemenu/SideMenu";
 import Content from "./content/Content";
 import { Grid } from "semantic-ui-react";

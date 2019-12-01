@@ -58,6 +58,6 @@
   padding: 0.5rem;
   transition: padding-left 0.3s ease, background-color 0.3s ease-in-out;
 }
-.MenuList .Menu > li a:hover {
-  padding-left: 2rem;
+.MenuList .Menu > li ul li a:hover {
+  padding-left: 1rem;
 }

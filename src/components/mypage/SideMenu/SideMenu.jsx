@@ -55,6 +55,12 @@ class SideMenu extends Component {
           <h2>Menu</h2>
           <ul className="Menu" style={classes.Menu}>
             {this.renderMenu()}
+            <li>
+              <a href="#">
+                <i className="fas fa-address-book"></i>
+                &ensp;Signout
+              </a>
+            </li>
           </ul>
         </div>
       </div>

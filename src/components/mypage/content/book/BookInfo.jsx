@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import BookDetail from "./BookDetail";
 import ShowMemo from "../memo/ShowMemo";
-import CreateMemo from "../table/CreateMemo";
+import CreateMemo from "../memo/CreateMemo";
 
 const BookInfo = () => {
   return (

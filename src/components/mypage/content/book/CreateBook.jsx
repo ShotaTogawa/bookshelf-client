@@ -1,19 +1,26 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { bookGenres } from "../../../../utils/variables";
-import { Form, Select, Grid, Message } from "semantic-ui-react";
+import { createBook } from "../../../../actions";
+import { Form, Grid, Message } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 
 class CreateBook extends Component {
   state = {
-    title: "",
+    name: "",
     author: "",
     genre: "",
+    price: null,
     page_nums: null,
     errors: []
   };
 
-  isFormEmpty = ({ title, genre, author, page_nums }) => {
-    return !title.length || !genre.length || !author.length || !page_nums;
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  isFormEmpty = ({ name, genre, author, page_nums }) => {
+    return !name.length || !genre.length || !author.length || !page_nums.length;
   };
 
   isFormValid = () => {
@@ -36,15 +43,18 @@ class CreateBook extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const { title, author, genre, page_nums } = this.state;
+    const local = JSON.parse(localStorage.getItem("user"));
+    console.log(typeof local.user._id);
+    const { name, author, genre, page_nums, price } = this.state;
 
     if (this.isFormValid()) {
-      await this.props.createBook({
-        title,
+      await this.props.createBook(local.user._id, {
+        name,
         author,
         genre,
         page_nums,
-        userId: "putuseridhere"
+        price,
+        userId: local.user._id
       });
     }
   };
@@ -55,13 +65,14 @@ class CreateBook extends Component {
       <Grid.Column width={1}></Grid.Column>
       <Grid.Column width={8} style={{ marginTop: "30px" }}>
         <h1 style={{ textAlign: "center" }}>Register Book</h1>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Book Title</label>
             <input
               type="text"
-              name="title"
+              name="name"
               placeholder="Enter your book title"
+              onChange={this.handleChange}
             />
           </Form.Field>
           <Form.Field>
@@ -70,15 +81,22 @@ class CreateBook extends Component {
               type="text"
               name="author"
               placeholder="Enter the author name"
+              onChange={this.handleChange}
             />
           </Form.Field>
           <Form.Field placeholder="Genre">
-            <Form.Field
-              control={Select}
-              label="Genre"
-              options={bookGenres}
-              placeholder="Genre"
-            />
+            <label htmlFor="genre">Genre</label>
+            <select
+              className="form-control"
+              value={this.state.value}
+              name="genre"
+              onChange={this.handleChange}
+            >
+              <option>Select Genre</option>
+              {bookGenres.map(genre => {
+                return <option value={genre}>{genre}</option>;
+              })}
+            </select>
           </Form.Field>
           <Form.Field>
             <label>The book's number of pages</label>
@@ -86,6 +104,16 @@ class CreateBook extends Component {
               type="number"
               name="page_nums"
               placeholder="Enter the number of pages of the book"
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>The book's purchased price</label>
+            <input
+              type="number"
+              name="price"
+              placeholder="Enter purchased price"
+              onChange={this.handleChange}
             />
           </Form.Field>
           <button className="ui button" type="submit">
@@ -102,8 +130,9 @@ class CreateBook extends Component {
     </Grid>
   );
   render() {
+    console.log(this.state);
     return <div>{this.renderForm()}</div>;
   }
 }
 
-export default CreateBook;
+export default connect(null, { createBook })(CreateBook);

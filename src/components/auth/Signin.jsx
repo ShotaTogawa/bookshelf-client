@@ -62,7 +62,7 @@ class Signin extends Component {
 
   redirectUser = () => {
     if (user) {
-      return <Redirect to="/user/dashboard" />;
+      return <Redirect to="/user" />;
     }
 
     if (!user) {

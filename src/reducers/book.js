@@ -1,9 +1,10 @@
 import * as actionTypes from "../actions/type";
 
-const book_reducer = (state, action) => {
+const book_reducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.CREATE_BOOK:
-      return {};
+      console.log(action.payload);
+      return { ...state, [action.payload.id]: action.payload };
     default:
       return state;
   }

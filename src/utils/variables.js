@@ -1,22 +1,18 @@
 export const bookGenres = [
-  { key: "Arts", text: "Arts", value: "Arts" },
-  { key: "Biographies", text: "Biographies", value: "Biographies" },
-  { key: "Business", text: "Business", value: "Business" },
-  {
-    key: "Computers Technology",
-    text: "Computers Technology",
-    value: "Computers Technology"
-  },
-  { key: "Fitness", text: "Fitness", value: "Fitness" },
-  { key: "Health", text: "Health", value: "Health" },
-  { key: "Literature", text: "Literature", value: "Literature" },
-  { key: "Novel", text: "Novel", value: "Novel" },
-  { key: "Politics", text: "Politics", value: "Politics" },
-  { key: "Religion", text: "Religion", value: "Religion" },
-  { key: "Science", text: "Science", value: "Science" },
-  { key: "Self-Help", text: "Self-Help", value: "Self-Help" },
-  { key: "Social Science", text: "Social Science", value: "Social Science" },
-  { key: "Others", text: "Others", value: "Others" }
+  "Arts",
+  "Biographies",
+  "Business",
+  "Computers Technology",
+  "Fitness",
+  "Health",
+  "Literature",
+  "Novel",
+  "Politics",
+  "Religion",
+  "Science",
+  "Self-Help",
+  "Social Science",
+  "Others"
 ];
 
 export const tableHeaderBefore = [

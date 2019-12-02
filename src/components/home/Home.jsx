@@ -7,7 +7,7 @@ const { user } = isAuthenticated();
 
 const redirectUser = () => {
   if (user) {
-    return <Redirect to="/user/dashboard" />;
+    return <Redirect to="/user" />;
   }
 
   if (!user) {

@@ -20,7 +20,8 @@ const user_reducer = (state = initialUser, action) => {
       return {
         user: action.payload.user
       };
-    case actionTypes.LOGOUT_USER:
+    case actionTypes.SIGNOUT_USER:
+      localStorage.removeItem("user");
       return {
         ...state
       };

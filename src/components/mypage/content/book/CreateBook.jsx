@@ -8,13 +8,12 @@ class CreateBook extends Component {
     title: "",
     author: "",
     genre: "",
-    page_nums
+    page_nums: null,
+    errors: []
   };
 
   isFormEmpty = ({ title, genre, author, page_nums }) => {
-    return (
-      !title.length || !genre.length || !author.length || !page_nums.length
-    );
+    return !title.length || !genre.length || !author.length || !page_nums;
   };
 
   isFormValid = () => {

@@ -1,9 +1,55 @@
 import React, { Component } from "react";
 import { bookGenres } from "../../../../utils/variables";
-import { Form, Select, Grid } from "semantic-ui-react";
+import { Form, Select, Grid, Message } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 
 class CreateBook extends Component {
+  state = {
+    title: "",
+    author: "",
+    genre: "",
+    page_nums
+  };
+
+  isFormEmpty = ({ title, genre, author, page_nums }) => {
+    return (
+      !title.length || !genre.length || !author.length || !page_nums.length
+    );
+  };
+
+  isFormValid = () => {
+    let errors = [];
+    let error;
+    if (this.isFormEmpty(this.state)) {
+      error = { message: "Please fill in every fields" };
+      this.setState({ errors: errors.concat(error) });
+      return false;
+    }
+    return true;
+  };
+
+  displayErrors = errors =>
+    errors.map((error, i) => (
+      <small key={i} className="form-text alert alert-danger">
+        {error.message}
+      </small>
+    ));
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    const { title, author, genre, page_nums } = this.state;
+
+    if (this.isFormValid()) {
+      await this.props.createBook({
+        title,
+        author,
+        genre,
+        page_nums,
+        userId: "putuseridhere"
+      });
+    }
+  };
+
   renderForm = () => (
     <Grid>
       <SideMenu />
@@ -47,6 +93,12 @@ class CreateBook extends Component {
             Submit
           </button>
         </Form>
+        {this.state.errors.length > 0 && (
+          <Message error>
+            <h3>Error</h3>
+            {this.displayErrors(this.state.errors)}
+          </Message>
+        )}
       </Grid.Column>
     </Grid>
   );

@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import SideMenu from "../../sidemenu/SideMenu";
+import { connect } from "react-redux";
+import { fetchBooks } from "../../../../actions";
 import {
   tableHeaderBefore,
   tableHeaderReading,
@@ -31,6 +33,11 @@ const tableData = [
 class BookTable extends Component {
   state = { activeItem: "Reading" };
 
+  componentDidMount() {
+    const local = JSON.parse(localStorage.getItem("user"));
+    this.props.fetchBooks(local.user._id);
+  }
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
   renderTableHeader = () => {
     return tableHeaderBefore.map(header => {
@@ -39,6 +46,7 @@ class BookTable extends Component {
   };
 
   renderTableData = () => {
+    // const local = JSON.parse(localStorage.getItem("user"));
     return tableData.map(data => {
       return (
         <Table.Body>
@@ -62,6 +70,7 @@ class BookTable extends Component {
   };
 
   render() {
+    console.log(this.props.books);
     return (
       <Grid>
         <SideMenu />
@@ -95,4 +104,11 @@ class BookTable extends Component {
   }
 }
 
-export default BookTable;
+const mapStateToProps = state => {
+  return {
+    books: state.book.books,
+    currentUser: state.user.user
+  };
+};
+
+export default connect(mapStateToProps, { fetchBooks })(BookTable);

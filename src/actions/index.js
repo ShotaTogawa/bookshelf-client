@@ -26,7 +26,12 @@ export const setCurrentUser = userId => async dispatch => {
 // book
 
 export const createBook = (userId, formValues) => async dispatch => {
-  console.log(formValues);
   const response = await api.post(`/api/books/${userId}`, formValues);
   dispatch({ type: actionTypes.CREATE_BOOK, payload: response.data });
+};
+
+export const fetchBooks = userId => async dispatch => {
+  const response = await api.get(`/api/books/${userId}`);
+  console.log(response);
+  dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
 };

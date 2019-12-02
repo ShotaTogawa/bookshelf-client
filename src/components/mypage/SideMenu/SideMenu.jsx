@@ -5,20 +5,19 @@ import defaultImage from "../../assets/user.svg";
 import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
 import { Grid } from "semantic-ui-react";
-import { signout } from "../../../actions";
-
-const user = {
-  name: "test",
-  avatar: ""
-};
+import { signout, setCurrentUser } from "../../../actions";
 
 class SideMenu extends Component {
+  componentDidMount() {
+    const local = JSON.parse(localStorage.getItem("user"));
+    this.props.setCurrentUser(local.user._id);
+  }
   renderUser = () => {
     return (
       <div className="User" style={classes.User}>
-        <img src={defaultImage} alt={user.name} />
+        <img src={defaultImage} alt={this.props.user.name} />
         <p>
-          Welcome: <span>{user.name}</span>
+          Welcome: <span>{this.props.user.name}</span>
         </p>
       </div>
     );
@@ -76,4 +75,10 @@ class SideMenu extends Component {
   }
 }
 
-export default connect(null, { signout })(SideMenu);
+const mapStateToProps = state => {
+  return {
+    user: state.user.user
+  };
+};
+
+export default connect(mapStateToProps, { signout, setCurrentUser })(SideMenu);

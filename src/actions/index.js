@@ -18,9 +18,7 @@ export const signout = () => async dispatch => {
 };
 
 // user
-export const setCurrentUser = user => {
-  return {
-    type: actionTypes.SET_CURRENT_USER,
-    user
-  };
+export const setCurrentUser = userId => async dispatch => {
+  const response = await api.get(`/api/user/${userId}`);
+  dispatch({ type: actionTypes.SET_CURRENT_USER, payload: response.data });
 };

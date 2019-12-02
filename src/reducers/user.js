@@ -2,8 +2,7 @@ import * as actionTypes from "../actions/type";
 import setAuthToken from "../utils/setAuthToken";
 
 const initialUser = {
-  user: {},
-  isAuthenticated: false
+  user: {}
 };
 
 const user_reducer = (state = initialUser, action) => {
@@ -27,8 +26,7 @@ const user_reducer = (state = initialUser, action) => {
       };
     case actionTypes.SET_CURRENT_USER:
       return {
-        isAuthenticated: action.token,
-        user: action.user
+        user: action.payload
       };
     default:
       return state;

@@ -49,7 +49,8 @@ class Signin extends Component {
       this.setState({ loading: true });
       this.props
         .signin({ email, password })
-        .then(() => {
+        .then(data => {
+          console.log(data);
           this.setState({ loading: false });
         })
         .catch(e => {
@@ -95,6 +96,7 @@ class Signin extends Component {
   }
 
   render() {
+    console.log(user);
     return (
       <div className="Auth_Container" style={classes.Auth_Container}>
         {this.state.loading ? <Spinner /> : this.renderForm()}

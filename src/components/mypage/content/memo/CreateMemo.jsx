@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 
 class CreateMemo extends Component {
-  state = {
-    memo: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      memo: ""
+    };
+  }
 
   handleChange = event => {
     this.setState({ memo: event.target.value });
@@ -13,6 +16,7 @@ class CreateMemo extends Component {
   handleSubmit = async () => {};
 
   render() {
+    console.log(this.props);
     return (
       <Form reply onSubmit={this.handleSubmit}>
         <Form.TextArea

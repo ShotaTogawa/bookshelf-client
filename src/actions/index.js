@@ -35,3 +35,8 @@ export const fetchBooks = userId => async dispatch => {
   console.log(response);
   dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
 };
+
+export const fetchBook = (userId, bookId) => async dispatch => {
+  const response = await api.get(`/api/books/${userId}/${bookId}`);
+  dispatch({ type: actionTypes.FETCH_BOOK, payload: response.data });
+};

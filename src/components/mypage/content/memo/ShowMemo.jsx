@@ -33,6 +33,7 @@ class ShowMemo extends Component {
     });
   };
   render() {
+    console.log(this.props.bookId);
     return (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>

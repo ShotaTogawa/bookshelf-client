@@ -1,7 +1,8 @@
 import React from "react";
 import { Header, Image, Table } from "semantic-ui-react";
 
-const BookDetail = () => {
+const BookDetail = props => {
+  console.log(props.book);
   const renderBookInfo = () => {
     return (
       <Table basic="very">

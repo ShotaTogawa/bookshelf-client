@@ -7,6 +7,8 @@ const book_reducer = (state = {}, action) => {
     case actionTypes.FETCH_BOOKS:
       console.log(action.payload);
       return { ...state, books: action.payload };
+    case actionTypes.FETCH_BOOK:
+      return { ...state, book: action.payload };
     default:
       return state;
   }

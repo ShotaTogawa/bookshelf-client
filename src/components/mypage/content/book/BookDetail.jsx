@@ -1,6 +1,7 @@
 import React from "react";
-import { Header, Image, Table } from "semantic-ui-react";
+import { Header, Image, Table, Button } from "semantic-ui-react";
 import moment from "moment";
+// import { deleteBook, updateBook } from "../../../../actions";
 
 const BookDetail = ({ book }) => {
   const renderBookInfo = book => {
@@ -87,8 +88,15 @@ const BookDetail = ({ book }) => {
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Edit</Table.Cell>
-            <Table.Cell>Delete</Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell>
+              <Button size="mini" inverted color="green">
+                Edit
+              </Button>
+              <Button size="mini" inverted color="red">
+                Delete
+              </Button>
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>

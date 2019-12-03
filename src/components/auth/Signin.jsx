@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Spinner from "../../spinner/Spinner";
 import { isAuthenticated } from "./";
+import history from "../../history";
 
 const { user } = isAuthenticated();
 
@@ -41,32 +42,19 @@ class Signin extends Component {
       </small>
     ));
 
-  handleSubmit = e => {
-    // e.preventDefault();
+  handleSubmit = async () => {
     this.setState({ error: [] });
     const { email, password } = this.state;
     if (this.isFormValid()) {
       this.setState({ loading: true });
-      this.props
-        .signin({ email, password })
-        .then(data => {
-          console.log(data);
-          this.setState({ loading: false });
-        })
-        .catch(e => {
-          console.log(e);
-          this.setState({ loading: false });
-        });
-    }
-  };
-
-  redirectUser = () => {
-    if (user) {
-      return <Redirect to="/user" />;
-    }
-
-    if (!user) {
-      return <Redirect to="/signin" />;
+      await this.props.signin({ email, password });
+      try {
+        this.setState({ loading: false });
+        history.push("/user");
+      } catch (e) {
+        console.log(e);
+        this.setState({ loading: false });
+      }
     }
   };
 
@@ -96,11 +84,9 @@ class Signin extends Component {
   }
 
   render() {
-    console.log(user);
     return (
       <div className="Auth_Container" style={classes.Auth_Container}>
         {this.state.loading ? <Spinner /> : this.renderForm()}
-        {this.redirectUser()}
       </div>
     );
   }

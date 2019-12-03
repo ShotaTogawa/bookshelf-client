@@ -1,17 +1,35 @@
 import React, { Component, Fragment } from "react";
-import { Comment } from "semantic-ui-react";
+import { Comment, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { showMemos } from "../../../../actions";
+import { showMemos, deleteMemo } from "../../../../actions";
+import Spinner from "../../../../spinner/Spinner";
+import history from "../../../../history";
 
 class ShowMemo extends Component {
   state = {
-    memo: ""
+    memo: "",
+    loading: false
   };
+
   componentDidMount() {
     const bookId = this.props.bookId;
     const userId = this.props.userId;
     this.props.showMemos(userId, bookId);
   }
+
+  handleDelete = async (event, userId, bookId, memoId) => {
+    event.preventDefault();
+    this.setState({ loading: true });
+    await this.props.deleteMemo(userId, bookId, memoId.toString());
+    try {
+      this.setState({ loading: false });
+      await this.props.showMemos(userId, bookId);
+      history.push(`/book/${bookId}`);
+    } catch (e) {
+      console.log(e);
+      this.setState({ loading: false });
+    }
+  };
 
   renderMemo = () => {
     return this.props.memos.map(data => {
@@ -22,7 +40,18 @@ class ShowMemo extends Component {
               <Comment.Content>
                 <Comment.Text>{memo.memo}</Comment.Text>
                 <Comment.Actions>
-                  <Comment.Action>Delete</Comment.Action>
+                  <Comment.Action
+                    onClick={event =>
+                      this.handleDelete(
+                        event,
+                        memo.userId,
+                        memo.bookId,
+                        memo._id
+                      )
+                    }
+                  >
+                    Delete
+                  </Comment.Action>
                   <Comment.Metadata>
                     <div>{memo.createdAt}</div>
                   </Comment.Metadata>
@@ -35,11 +64,13 @@ class ShowMemo extends Component {
     });
   };
   render() {
-    return (
+    return !this.state.loading ? (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>
         {this.renderMemo()}
       </div>
+    ) : (
+      <Spinner />
     );
   }
 }
@@ -50,4 +81,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { showMemos })(ShowMemo);
+export default connect(mapStateToProps, { showMemos, deleteMemo })(ShowMemo);

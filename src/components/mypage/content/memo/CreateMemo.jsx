@@ -27,10 +27,11 @@ class CreateMemo extends Component {
       bookId: bookId,
       userId: userId
     });
-    history.push(`book/${userId}`);
+    history.push(`book/${bookId}`);
   };
 
   render() {
+    console.log(this.state);
     return (
       <Form reply onSubmit={this.handleSubmit}>
         <Form.TextArea

@@ -55,3 +55,8 @@ export const createMemo = (userId, bookId, formValues) => async dispatch => {
   );
   dispatch({ type: actionTypes.CREATE_MEMO, payload: response.data });
 };
+
+export const deleteMemo = (userId, bookId, memoId) => async dispatch => {
+  await api.delete(`api/books/${userId}/${bookId}/memo/${memoId}`);
+  dispatch({ type: actionTypes.DELETE_MEMO });
+};

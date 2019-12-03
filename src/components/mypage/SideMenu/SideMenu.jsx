@@ -6,6 +6,7 @@ import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
 import { Grid } from "semantic-ui-react";
 import { signout, setCurrentUser } from "../../../actions";
+import history from "../../../history";
 
 class SideMenu extends Component {
   componentDidMount() {
@@ -24,7 +25,12 @@ class SideMenu extends Component {
   };
 
   handleSignout = async () => {
-    await this.props.signout().then(() => <Redirect to="/" />);
+    await this.props.signout();
+    try {
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   renderMenu = () => {

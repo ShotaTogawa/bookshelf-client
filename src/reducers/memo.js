@@ -6,6 +6,8 @@ const memo_reducer = (state = {}, action) => {
       return { ...state, [action.payload.id]: action.payload };
     case actionTypes.FETCH_MEMOS:
       return { ...state, memos: action.payload };
+    case actionTypes.DELETE_MEMO:
+      return { ...state };
     default:
       return {
         ...state

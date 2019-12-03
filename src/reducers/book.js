@@ -8,6 +8,10 @@ const book_reducer = (state = {}, action) => {
       return { ...state, books: action.payload };
     case actionTypes.FETCH_BOOK:
       return { ...state, book: action.payload };
+    case actionTypes.DELETE_MEMO:
+      return { ...state };
+    case actionTypes.EDIT_BOOK:
+      return { ...state, book: action.payload };
     default:
       return state;
   }

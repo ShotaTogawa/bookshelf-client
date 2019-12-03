@@ -44,7 +44,6 @@ class CreateBook extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     const local = JSON.parse(localStorage.getItem("user"));
-    console.log(typeof local.user._id);
     const { name, author, genre, page_nums, price } = this.state;
 
     if (this.isFormValid()) {
@@ -130,7 +129,6 @@ class CreateBook extends Component {
     </Grid>
   );
   render() {
-    console.log(this.state);
     return <div>{this.renderForm()}</div>;
   }
 }

@@ -16,28 +16,34 @@ class BookInfo extends Component {
   }
 
   renderBook = () => {
+    console.log(this.props.book);
     return this.props.book.map(book => {
       return (
-        <Grid>
-          <SideMenu />
+        <>
           <Grid.Column width={5}>
             <BookDetail book={book} />
           </Grid.Column>
           <Grid.Column width={7}>
-            <ShowMemo bookId={book._id} />
-            <CreateMemo bookId={book._id} />
+            <ShowMemo bookId={book._id} userId={book.userId} />
+            <CreateMemo bookId={book._id} userId={book.userId} />
           </Grid.Column>
-        </Grid>
+        </>
       );
     });
   };
 
   render() {
-    return this.renderBook();
+    return (
+      <Grid>
+        <SideMenu />
+        {this.renderBook()}
+      </Grid>
+    );
   }
 }
 
 const mapStateToProps = state => {
+  console.log(state.book);
   return {
     book: Object.values(state.book)
   };

@@ -40,3 +40,18 @@ export const fetchBook = (userId, bookId) => async dispatch => {
   const response = await api.get(`/api/books/${userId}/${bookId}`);
   dispatch({ type: actionTypes.FETCH_BOOK, payload: response.data });
 };
+
+// memo
+
+export const showMemos = (userId, bookId) => async dispatch => {
+  const response = await api.get(`api/books/${userId}/${bookId}/memo`);
+  dispatch({ type: actionTypes.FETCH_MEMOS, payload: response.data });
+};
+
+export const createMemo = (userId, bookId, formValues) => async dispatch => {
+  const response = await api.post(
+    `api/books/${userId}/${bookId}/memo`,
+    formValues
+  );
+  dispatch({ type: actionTypes.CREATE_MEMO, payload: response.data });
+};

@@ -70,7 +70,6 @@ class BookTable extends Component {
   };
 
   render() {
-    console.log(this.props.books);
     return (
       <Grid>
         <SideMenu />

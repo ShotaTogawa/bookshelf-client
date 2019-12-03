@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { createMemo } from "../../../../actions";
+import history from "../../../../history";
 
 class CreateMemo extends Component {
   constructor(props) {
@@ -13,10 +16,21 @@ class CreateMemo extends Component {
     this.setState({ memo: event.target.value });
   };
 
-  handleSubmit = async () => {};
+  handleSubmit = async event => {
+    event.preventDefault();
+    const bookId = this.props.bookId;
+    const userId = this.props.userId;
+    const { memo } = this.state;
+
+    await this.props.createMemo(userId, bookId, {
+      memo,
+      bookId: bookId,
+      userId: userId
+    });
+    history.push(`book/${userId}`);
+  };
 
   render() {
-    console.log(this.props);
     return (
       <Form reply onSubmit={this.handleSubmit}>
         <Form.TextArea
@@ -35,4 +49,4 @@ class CreateMemo extends Component {
   }
 }
 
-export default CreateMemo;
+export default connect(null, { createMemo })(CreateMemo);

@@ -41,6 +41,16 @@ export const fetchBook = (userId, bookId) => async dispatch => {
   dispatch({ type: actionTypes.FETCH_BOOK, payload: response.data });
 };
 
+export const deleteBook = (userId, bookId) => async dispatch => {
+  await api.delete(`/api/books/${userId}/${bookId}`);
+  dispatch({ type: actionTypes.DELETE_MEMO });
+};
+
+export const updateBook = (userId, bookId, formValues) => async dispatch => {
+  const response = await api.put(`/api/books/${userId}/${bookId}`, formValues);
+  dispatch({ type: actionTypes.EDIT_BOOK, payload: response.data });
+};
+
 // memo
 
 export const showMemos = (userId, bookId) => async dispatch => {

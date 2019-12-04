@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import SideMenu from "../../sidemenu/SideMenu";
 import { connect } from "react-redux";
 import { fetchBooks } from "../../../../actions";
+import Spinner from "../../../../spinner/Spinner";
+import moment from "moment";
 import {
   tableHeaderBefore,
   tableHeaderReading,
@@ -47,7 +49,11 @@ class BookTable extends Component {
 
   renderTableData = () => {
     // const local = JSON.parse(localStorage.getItem("user"));
-    return tableData.map(data => {
+    if (!this.props.books) {
+      return <Spinner />;
+    }
+    return this.props.books.map(data => {
+      console.log(data);
       return (
         <Table.Body>
           <Table.Row>
@@ -57,12 +63,16 @@ class BookTable extends Component {
                 size="tiny"
               />
             </Table.Cell>
-            <Table.Cell>{data.emp}</Table.Cell>
-            <Table.Cell>{data.a}</Table.Cell>
-            <Table.Cell>{data.b}</Table.Cell>
-            <Table.Cell>{data.c}</Table.Cell>
-            <Table.Cell>{data.d}</Table.Cell>
-            <Table.Cell>{data.e}</Table.Cell>
+            <Table.Cell>{data.name}</Table.Cell>
+            <Table.Cell>{data.genre}</Table.Cell>
+            <Table.Cell>{data.author}</Table.Cell>
+            <Table.Cell>{data.page_nums}</Table.Cell>
+            <Table.Cell>
+              {moment(data.createdAt).format("MMM D YYYY")}
+            </Table.Cell>
+            <Table.Cell>
+              {moment(data.startDate).format("MMM D YYYY")}
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
       );
@@ -70,6 +80,7 @@ class BookTable extends Component {
   };
 
   render() {
+    console.log(this.props.books);
     return (
       <Grid>
         <SideMenu />

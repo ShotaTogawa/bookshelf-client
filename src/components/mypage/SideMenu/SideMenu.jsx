@@ -19,7 +19,13 @@ class SideMenu extends Component {
         <div className="User" style={classes.User}>
           <img src={defaultImage} alt={this.props.user.name} />
         </div>
-        <h2 style={{ textAlign: "center", marginTop: "15px" }}>
+        <h2
+          style={{
+            textAlign: "center",
+            position: "sticky",
+            top: "105px"
+          }}
+        >
           {this.props.user.name}
         </h2>
       </>

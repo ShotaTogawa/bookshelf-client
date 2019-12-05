@@ -54,7 +54,7 @@ export const menus = [
     title: "User",
     submenus: [
       { url: "/user", title: "Status", icon: "fas fa-list" },
-      { url: "#", title: "Edit Profile", icon: "fas fa-user-edit" }
+      { url: "#", title: "Edit", icon: "fas fa-user-edit" }
     ]
   },
   {

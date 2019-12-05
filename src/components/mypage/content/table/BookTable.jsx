@@ -41,7 +41,22 @@ class BookTable extends Component {
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   renderTableHeader = () => {
+    if (this.state.activeItem === "Reading") {
+      return tableHeaderReading.map(header => {
+        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+      });
+    } else if (this.state.activeItem === "Before") {
+      return tableHeaderBefore.map(header => {
+        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+      });
+    } else {
+      return tableHeaderRead.map(header => {
+        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+      });
+    }
+
     return tableHeaderBefore.map(header => {
       return <Table.HeaderCell>{header}</Table.HeaderCell>;
     });
@@ -80,7 +95,7 @@ class BookTable extends Component {
   };
 
   render() {
-    console.log(this.props.books);
+    console.log(this.state);
     return (
       <Grid>
         <SideMenu />

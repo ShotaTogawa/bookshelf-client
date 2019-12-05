@@ -64,7 +64,7 @@ class BookTable extends Component {
     return (
       <Grid>
         <SideMenu />
-        <Grid.Column width={11} style={{ marginTop: "30px" }}>
+        <Grid.Column width={12} style={{ marginTop: "30px" }}>
           <Menu tabular>
             <Menu.Item
               name="Reading"

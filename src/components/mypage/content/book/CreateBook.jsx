@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bookGenres } from "../../../../utils/variables";
 import { createBook } from "../../../../actions";
-import { Form, Grid, Message } from "semantic-ui-react";
+import { Form, Grid, Message, Checkbox } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
+import history from "../../../../history";
+import { Redirect } from "react-router-dom";
 
 class CreateBook extends Component {
   state = {
     name: "",
     author: "",
     genre: "",
-    price: null,
-    page_nums: null,
+    price: "",
+    page_nums: "",
+    publish: false,
     errors: []
   };
 
@@ -44,7 +47,7 @@ class CreateBook extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     const local = JSON.parse(localStorage.getItem("user"));
-    const { name, author, genre, page_nums, price } = this.state;
+    const { name, author, genre, page_nums, price, publish } = this.state;
 
     if (this.isFormValid()) {
       await this.props.createBook(local.user._id, {
@@ -53,6 +56,7 @@ class CreateBook extends Component {
         genre,
         page_nums,
         price,
+        public: publish,
         userId: local.user._id
       });
     }
@@ -64,6 +68,11 @@ class CreateBook extends Component {
       <Grid.Column width={1}></Grid.Column>
       <Grid.Column width={8} style={{ marginTop: "30px" }}>
         <h1 style={{ textAlign: "center" }}>Register Book</h1>
+        {this.state.errors.length > 0 && (
+          <Message error>
+            <h3>{this.displayErrors(this.state.errors)}</h3>
+          </Message>
+        )}
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Book Title</label>
@@ -115,20 +124,20 @@ class CreateBook extends Component {
               onChange={this.handleChange}
             />
           </Form.Field>
+          <Form.Field
+            control={Checkbox}
+            label={<label>Do you want to introduce this book in public?</label>}
+            onClick={e => this.setState({ publish: !this.state.publish })}
+          />
           <button className="ui button" type="submit">
             Submit
           </button>
         </Form>
-        {this.state.errors.length > 0 && (
-          <Message error>
-            <h3>Error</h3>
-            {this.displayErrors(this.state.errors)}
-          </Message>
-        )}
       </Grid.Column>
     </Grid>
   );
   render() {
+    console.log(this.state.publish);
     return <div>{this.renderForm()}</div>;
   }
 }

@@ -10,28 +10,7 @@ import {
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table, Menu, Image, Grid } from "semantic-ui-react";
-
-const tableData = [
-  {
-    emp: "someone",
-    guest: 10,
-    a: 10,
-    b: 20,
-    c: 30,
-    d: 40,
-    e: 50
-  },
-  {
-    emp: "anyone",
-    guest: 20,
-    a: 10,
-    b: 20,
-    c: 30,
-    d: 40,
-    e: 50
-  }
-];
+import { Table, Menu, Grid } from "semantic-ui-react";
 
 class BookTable extends Component {
   state = { activeItem: "Reading" };

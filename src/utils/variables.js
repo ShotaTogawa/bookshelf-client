@@ -53,7 +53,7 @@ export const menus = [
     icon: "fas fa-user-circle",
     title: "User",
     submenus: [
-      { url: "#", title: "Status", icon: "fas fa-list" },
+      { url: "/user", title: "Status", icon: "fas fa-list" },
       { url: "#", title: "Edit Profile", icon: "fas fa-user-edit" }
     ]
   },
@@ -62,8 +62,8 @@ export const menus = [
     icon: "fas fa-book",
     title: "Book",
     submenus: [
-      { url: "#", title: "Book List", icon: "fas fa-th-list" },
-      { url: "#", title: "Register Book", icon: "fas fa-plus" },
+      { url: "/books", title: "List", icon: "fas fa-th-list" },
+      { url: "/book", title: "Register", icon: "fas fa-plus" },
       { url: "#", title: "TimeLine", icon: "fas fa-stream" }
     ]
   }

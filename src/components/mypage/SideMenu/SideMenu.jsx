@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import defaultImage from "../../assets/user.svg";
 import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
@@ -15,12 +15,14 @@ class SideMenu extends Component {
   }
   renderUser = () => {
     return (
-      <div className="User" style={classes.User}>
-        <img src={defaultImage} alt={this.props.user.name} />
-        <p>
-          Welcome: <span>{this.props.user.name}</span>
-        </p>
-      </div>
+      <>
+        <div className="User" style={classes.User}>
+          <img src={defaultImage} alt={this.props.user.name} />
+        </div>
+        <h2 style={{ textAlign: "center", marginTop: "15px" }}>
+          {this.props.user.name}
+        </h2>
+      </>
     );
   };
 
@@ -46,10 +48,10 @@ class SideMenu extends Component {
             ? menu.submenus.map(submenu => (
                 <ul>
                   <li key={submenu.title}>
-                    <a href={submenu.url}>
+                    <Link to={submenu.url}>
                       <i className={submenu.icon}></i>
                       &ensp;{submenu.title}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               ))
@@ -61,17 +63,16 @@ class SideMenu extends Component {
 
   render() {
     return (
-      <Grid.Column width={4}>
+      <Grid.Column width={3}>
         <div className="Sidebar" stlye={classes.Sidebar}>
           {this.renderUser()}
 
           <div className="MenuList" style={classes.MenuList}>
-            <h2>Menu</h2>
             <ul className="Menu" style={classes.Menu}>
               {this.renderMenu()}
               <li onClick={this.handleSignout} style={{ cursor: "pointer" }}>
-                <i className="fas fa-sign-out-alt"></i>
-                &ensp;Signout
+                &thinsp;&thinsp;<i className="fas fa-sign-out-alt"></i>
+                &thinsp;&thinsp;Signout
               </li>
             </ul>
           </div>

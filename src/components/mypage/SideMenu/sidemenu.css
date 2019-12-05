@@ -33,7 +33,7 @@
 }
 .MenuList .Menu > li {
   padding: 0.5rem;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 }
 .MenuList .Menu > li:hover ul {
@@ -43,7 +43,7 @@
   display: none;
   list-style: none;
   padding: 0.2rem;
-  font-size: 18px;
+  font-size: 14px;
   background-color: #040404;
 }
 .MenuList .Menu > li ul li {

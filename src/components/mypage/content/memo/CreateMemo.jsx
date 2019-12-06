@@ -30,8 +30,12 @@ class CreateMemo extends Component {
       bookId: bookId,
       userId: userId
     });
-    this.setState({ loading: false });
-    history.push(`book/${bookId}`);
+    try {
+      this.setState({ loading: false });
+      history.push(`/book/${bookId}`);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   renderForm = () => {

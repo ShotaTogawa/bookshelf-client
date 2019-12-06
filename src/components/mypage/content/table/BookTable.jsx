@@ -39,7 +39,6 @@ class BookTable extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <Grid>
         <SideMenu />
@@ -80,7 +79,6 @@ class BookTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     books: state.book.books,
     currentUser: state.user.user

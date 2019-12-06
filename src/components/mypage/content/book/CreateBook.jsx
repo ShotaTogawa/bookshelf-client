@@ -138,7 +138,6 @@ class CreateBook extends Component {
     </Grid>
   );
   render() {
-    console.log(this.state.publish);
     return <div>{this.renderForm()}</div>;
   }
 }

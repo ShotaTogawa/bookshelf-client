@@ -33,7 +33,7 @@ class BookDetail extends Component {
   };
 
   renderBookInfo = book => {
-    console.log(book);
+    console.log("bookDetail", book);
     // if (!book) return <Spinner />;
     return (
       <Table basic="very">

@@ -10,7 +10,6 @@ const renderTableData = books => {
     return <Spinner />;
   }
   return books.map(data => {
-    console.log(data);
     return (
       <Table.Body>
         <Table.Row>

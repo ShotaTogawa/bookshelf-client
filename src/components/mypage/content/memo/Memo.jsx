@@ -33,12 +33,12 @@ class Memo extends Component {
   };
 
   renderMemo = () => {
+    console.log("memooooooo", this.props.memos);
     if (!this.props.memos) return <Spinner />;
-    return this.props.memos.map(data => {
-      console.log(`data: ${JSON.stringify(data)}`);
+    return this.props.memos.map((data, i) => {
       return data.map(memo => {
         return (
-          <Comment.Group>
+          <Comment.Group key={memo._id}>
             <Comment>
               <Comment.Content>
                 <Comment.Text>{memo.memo}</Comment.Text>
@@ -67,7 +67,7 @@ class Memo extends Component {
     });
   };
   render() {
-    console.log(this.props.location);
+    console.log(this.props.memos);
     return (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>

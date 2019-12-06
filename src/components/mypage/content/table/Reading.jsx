@@ -10,7 +10,6 @@ const renderTableData = books => {
     return <Spinner />;
   }
   return books.map(data => {
-    console.log(data);
     const progress = data.read_pages / data.page_nums;
     return (
       <Table.Body>

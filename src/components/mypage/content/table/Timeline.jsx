@@ -33,7 +33,6 @@ class Timeline extends Component {
   };
 
   render() {
-    console.log(this.props.books);
     return (
       <Grid>
         <SideMenu />
@@ -47,7 +46,6 @@ class Timeline extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     user: state.user.user,
     books: state.book.books

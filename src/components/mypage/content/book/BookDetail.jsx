@@ -34,6 +34,7 @@ class BookDetail extends Component {
 
   renderBookInfo = book => {
     console.log(book);
+    // if (!book) return <Spinner />;
     return (
       <Table basic="very">
         <Table.Body>

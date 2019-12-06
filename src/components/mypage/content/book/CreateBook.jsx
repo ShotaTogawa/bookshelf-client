@@ -59,6 +59,7 @@ class CreateBook extends Component {
         public: publish,
         userId: local.user._id
       });
+      history.push("/books");
     }
   };
 

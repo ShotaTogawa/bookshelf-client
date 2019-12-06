@@ -1,6 +1,7 @@
 import React from "react";
 import Spinner from "../../../../spinner/Spinner";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import { Table, Image } from "semantic-ui-react";
 
 const renderTableData = books => {
@@ -15,12 +16,16 @@ const renderTableData = books => {
       <Table.Body>
         <Table.Row>
           <Table.Cell>
-            <Image
-              src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
-              size="tiny"
-            />
+            <Link to={`/book/${data._id}`}>
+              <Image
+                src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
+                size="tiny"
+              />
+            </Link>
           </Table.Cell>
-          <Table.Cell>{data.name}</Table.Cell>
+          <Table.Cell>
+            <Link to={`/book/${data._id}`}>{data.name}</Link>
+          </Table.Cell>
           <Table.Cell>{data.genre}</Table.Cell>
           <Table.Cell>{data.author}</Table.Cell>
           <Table.Cell>{progress}</Table.Cell>

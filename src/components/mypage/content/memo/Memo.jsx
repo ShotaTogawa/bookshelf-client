@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import CreateMemo from "./CreateMemo";
 import { Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { showMemos, deleteMemo } from "../../../../actions";
 import Spinner from "../../../../spinner/Spinner";
 import history from "../../../../history";
 
-class ShowMemo extends Component {
+class Memo extends Component {
   state = {
     memo: "",
     loading: false
@@ -34,6 +35,7 @@ class ShowMemo extends Component {
   renderMemo = () => {
     if (!this.props.memos) return <Spinner />;
     return this.props.memos.map(data => {
+      console.log(`data: ${JSON.stringify(data)}`);
       return data.map(memo => {
         return (
           <Comment.Group>
@@ -65,10 +67,12 @@ class ShowMemo extends Component {
     });
   };
   render() {
+    console.log(this.props.location);
     return (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>
         {this.renderMemo()}
+        <CreateMemo bookId={this.props.bookId} userId={this.props.userId} />
       </div>
     );
   }
@@ -80,4 +84,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { showMemos, deleteMemo })(ShowMemo);
+export default connect(mapStateToProps, { showMemos, deleteMemo })(Memo);

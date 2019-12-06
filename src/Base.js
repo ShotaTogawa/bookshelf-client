@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/auth/PrivateRouter";
+import history from "./history";
 
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
@@ -12,9 +13,9 @@ import GraphList from "./components/mypage/content/user/GraphList";
 import SearchBook from "./components/mypage/content/book/SearchBook";
 import Timeline from "./components/mypage/content/table/Timeline";
 
-const Router = () => {
+const Base = () => {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Signin} />
@@ -27,8 +28,8 @@ const Router = () => {
         <PrivateRoute path="/timeline" exact component={Timeline} />
         <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
-export default Router;
+export default Base;

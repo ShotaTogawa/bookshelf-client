@@ -11,7 +11,7 @@ class BookInfo extends Component {
   componentDidMount() {
     this.props.fetchBook(
       "5dd4c61ac11600fea94c6a22",
-      "5de606a35fe2ca2dca125a99"
+      "5de9e38496a20038f5ea18bf"
     );
   }
 

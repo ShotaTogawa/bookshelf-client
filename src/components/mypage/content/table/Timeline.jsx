@@ -3,50 +3,28 @@ import { Feed, Grid } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 import { getTimeline } from "../../../../actions";
 import { connect } from "react-redux";
-
-const feedData = [
-  {
-    avatar: "",
-    name: "Bob",
-    title: "Apple pen",
-    image: "https://react.semantic-ui.com/images/wireframe/image.png",
-    date: "3days ago"
-  },
-  {
-    avatar: "",
-    name: "Bob",
-    title: "Apple pen",
-    image: "https://react.semantic-ui.com/images/wireframe/image.png",
-    date: "3days ago"
-  },
-  {
-    avatar: "",
-    name: "Bob",
-    title: "Apple pen",
-    image: "https://react.semantic-ui.com/images/wireframe/image.png",
-    date: "3days ago"
-  }
-];
+import Spinner from "../../../../spinner/Spinner";
 
 class Timeline extends Component {
   componentDidMount() {
-    // const local = JSON.parse(localStorage.getItem("user"));
-    // this.props.getTimeline(local.user._id);
+    const local = JSON.parse(localStorage.getItem("user"));
+    this.props.getTimeline(local.user._id);
   }
   renderTimeline = () => {
-    return feedData.map((data, i) => {
+    if (!this.props.books) return <Spinner />;
+    return this.props.books.map((data, i) => {
       return (
         <Feed key={i}>
           <Feed.Event>
-            <Feed.Label image={data.avatar /*"avatar"*/} />
+            <Feed.Label image={data.userId.avatar /*"avatar"*/} />
             <Feed.Content>
               <Feed.Summary>
-                <a>{data.name}</a> added "{data.title}"
+                <a>{data.userId.name}</a> added "{data.name}"
               </Feed.Summary>
               <Feed.Extra images>
                 <img src={data.image} />
               </Feed.Extra>
-              <Feed.Date>{data.date}</Feed.Date>
+              <Feed.Date>{data.createdAt}</Feed.Date>
             </Feed.Content>
           </Feed.Event>
         </Feed>
@@ -55,6 +33,7 @@ class Timeline extends Component {
   };
 
   render() {
+    console.log(this.props.books);
     return (
       <Grid>
         <SideMenu />

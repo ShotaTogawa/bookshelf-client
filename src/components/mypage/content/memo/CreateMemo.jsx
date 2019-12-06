@@ -17,7 +17,7 @@ class CreateMemo extends Component {
   };
 
   handleSubmit = async event => {
-    event.preventDefault();
+    // event.preventDefault();
     const bookId = this.props.bookId;
     const userId = this.props.userId;
     const { memo } = this.state;

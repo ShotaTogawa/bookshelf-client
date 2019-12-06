@@ -32,6 +32,7 @@ class ShowMemo extends Component {
   };
 
   renderMemo = () => {
+    if (!this.props.memos) return <Spinner />;
     return this.props.memos.map(data => {
       return data.map(memo => {
         return (
@@ -64,13 +65,11 @@ class ShowMemo extends Component {
     });
   };
   render() {
-    return !this.state.loading ? (
+    return (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>
         {this.renderMemo()}
       </div>
-    ) : (
-      <Spinner />
     );
   }
 }

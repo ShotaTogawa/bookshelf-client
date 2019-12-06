@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import SideMenu from "../../sidemenu/SideMenu";
 import BeforeReading from "./BeforeReading";
 import Reading from "./Reading";

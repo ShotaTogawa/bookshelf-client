@@ -51,6 +51,12 @@ export const updateBook = (userId, bookId, formValues) => async dispatch => {
   dispatch({ type: actionTypes.EDIT_BOOK, payload: response.data });
 };
 
+export const getTimeline = userId => async dispatch => {
+  const response = await api.get(`/api/timeline/${userId}`);
+  console.log(response);
+  dispatch({ type: actionTypes.GET_TIMELINE, payload: response.data });
+};
+
 // memo
 
 export const showMemos = (userId, bookId) => async dispatch => {

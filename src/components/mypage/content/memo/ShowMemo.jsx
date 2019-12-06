@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { Comment, Button } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { showMemos, deleteMemo } from "../../../../actions";
 import Spinner from "../../../../spinner/Spinner";

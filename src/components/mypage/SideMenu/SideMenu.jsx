@@ -52,7 +52,7 @@ class SideMenu extends Component {
 
           {menu.submenus.length > 0
             ? menu.submenus.map(submenu => (
-                <ul>
+                <ul key={submenu.title}>
                   <li key={submenu.title}>
                     <Link to={submenu.url}>
                       <i className={submenu.icon}></i>
@@ -76,7 +76,11 @@ class SideMenu extends Component {
           <div className="MenuList" style={classes.MenuList}>
             <ul className="Menu" style={classes.Menu}>
               {this.renderMenu()}
-              <li onClick={this.handleSignout} style={{ cursor: "pointer" }}>
+              <li
+                onClick={this.handleSignout}
+                style={{ cursor: "pointer" }}
+                key="logout"
+              >
                 &thinsp;&thinsp;<i className="fas fa-sign-out-alt"></i>
                 &thinsp;&thinsp;Signout
               </li>

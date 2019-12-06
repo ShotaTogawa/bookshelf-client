@@ -12,6 +12,9 @@ const book_reducer = (state = {}, action) => {
       return { ...state };
     case actionTypes.EDIT_BOOK:
       return { ...state, book: action.payload };
+    case actionTypes.GET_TIMELINE:
+      console.log(action.payload);
+      return { ...state, books: action.payload };
     default:
       return state;
   }

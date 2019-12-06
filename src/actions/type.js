@@ -15,6 +15,7 @@ export const EDIT_BOOK = "EDIT_BOOK";
 export const DELETE_BOOK = "DELETE_BOOK";
 export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 export const GET_IMAGE = "GET_IMAGE";
+export const GET_TIMELINE = "GET_TIMELINE";
 
 export const CREATE_MEMO = "CREATE_MEMO";
 export const FETCH_MEMO = "FETCH_MEMO";

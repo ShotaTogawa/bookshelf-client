@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Feed, Grid } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
+import { getTimeline } from "../../../../actions";
+import { connect } from "react-redux";
 
 const feedData = [
   {
@@ -27,20 +29,24 @@ const feedData = [
 ];
 
 class Timeline extends Component {
+  componentDidMount() {
+    // const local = JSON.parse(localStorage.getItem("user"));
+    // this.props.getTimeline(local.user._id);
+  }
   renderTimeline = () => {
-    return feedData.map(data => {
+    return feedData.map((data, i) => {
       return (
-        <Feed>
+        <Feed key={i}>
           <Feed.Event>
             <Feed.Label image={data.avatar /*"avatar"*/} />
             <Feed.Content>
-              <Feed.Date>{data.date}</Feed.Date>
               <Feed.Summary>
                 <a>{data.name}</a> added "{data.title}"
               </Feed.Summary>
               <Feed.Extra images>
                 <img src={data.image} />
               </Feed.Extra>
+              <Feed.Date>{data.date}</Feed.Date>
             </Feed.Content>
           </Feed.Event>
         </Feed>
@@ -61,4 +67,12 @@ class Timeline extends Component {
   }
 }
 
-export default Timeline;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    user: state.user.user,
+    books: state.book.books
+  };
+};
+
+export default connect(mapStateToProps, { getTimeline })(Timeline);

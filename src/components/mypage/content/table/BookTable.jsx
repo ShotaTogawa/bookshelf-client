@@ -1,10 +1,16 @@
 import React, { Component, Fragment } from "react";
+import SideMenu from "../../sidemenu/SideMenu";
+import BeforeReading from "./BeforeReading";
+import Reading from "./Reading";
+import Read from "./Read";
+import { connect } from "react-redux";
+import { fetchBooks } from "../../../../actions";
 import {
   tableHeaderBefore,
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table as Table1, Menu, Image, Header } from "semantic-ui-react";
+import { Table, Menu, Image, Grid } from "semantic-ui-react";
 
 const tableData = [
   {
@@ -30,65 +36,75 @@ const tableData = [
 class BookTable extends Component {
   state = { activeItem: "Reading" };
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  renderTableHeader = () => {
-    return tableHeaderBefore.map(header => {
-      return <Table1.HeaderCell>{header}</Table1.HeaderCell>;
-    });
-  };
+  componentDidMount() {
+    const local = JSON.parse(localStorage.getItem("user"));
+    this.props.fetchBooks(local.user._id);
+  }
 
-  renderTableData = () => {
-    return tableData.map(data => {
-      return (
-        <Table1.Body>
-          <Table1.Row>
-            <Table1.Cell>
-              <Image
-                src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
-                size="tiny"
-              />
-            </Table1.Cell>
-            <Table1.Cell>{data.emp}</Table1.Cell>
-            <Table1.Cell>{data.a}</Table1.Cell>
-            <Table1.Cell>{data.b}</Table1.Cell>
-            <Table1.Cell>{data.c}</Table1.Cell>
-            <Table1.Cell>{data.d}</Table1.Cell>
-            <Table1.Cell>{data.e}</Table1.Cell>
-          </Table1.Row>
-        </Table1.Body>
-      );
-    });
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  renderTableHeader = () => {
+    if (this.state.activeItem === "Reading") {
+      return tableHeaderReading.map(header => {
+        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+      });
+    } else if (this.state.activeItem === "Before") {
+      return tableHeaderBefore.map(header => {
+        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+      });
+    } else {
+      return tableHeaderRead.map(header => {
+        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+      });
+    }
   };
 
   render() {
+    console.log(this.state);
     return (
-      <Fragment>
-        <Menu tabular>
-          <Menu.Item
-            name="Reading"
-            active={this.state.activeItem === "Reading"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Before"
-            active={this.state.activeItem === "Before"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Read"
-            active={this.state.activeItem === "Read"}
-            onClick={this.handleItemClick}
-          />
-        </Menu>
-        <Table1 basic="very">
-          <Table1.Header>
-            <Table1.Row>{this.renderTableHeader()}</Table1.Row>
-          </Table1.Header>
-          {this.renderTableData()}
-        </Table1>
-      </Fragment>
+      <Grid>
+        <SideMenu />
+        <Grid.Column width={11} style={{ marginTop: "30px" }}>
+          <Menu tabular>
+            <Menu.Item
+              name="Reading"
+              active={this.state.activeItem === "Reading"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="Before"
+              active={this.state.activeItem === "Before"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="Read"
+              active={this.state.activeItem === "Read"}
+              onClick={this.handleItemClick}
+            />
+          </Menu>
+          <Table basic="very">
+            <Table.Header>
+              <Table.Row>{this.renderTableHeader()}</Table.Row>
+            </Table.Header>
+            {this.state.activeItem === "Reading" ? (
+              <Reading books={this.props.books} />
+            ) : this.state.activeItem === "Read" ? (
+              <Read books={this.props.books} />
+            ) : (
+              <BeforeReading books={this.props.books} />
+            )}
+          </Table>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-export default BookTable;
+const mapStateToProps = state => {
+  return {
+    books: state.book.books,
+    currentUser: state.user.user
+  };
+};
+
+export default connect(mapStateToProps, { fetchBooks })(BookTable);

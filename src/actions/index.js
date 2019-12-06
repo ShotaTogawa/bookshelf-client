@@ -1,6 +1,7 @@
 import * as actionTypes from "./type";
 import { api } from "../api";
 
+// auth
 export const signup = formValues => async dispatch => {
   const response = await api.post("/api/signup", formValues);
   dispatch({ type: actionTypes.SIGNIN_USER, payload: response.data });
@@ -11,9 +12,61 @@ export const signin = formValues => async dispatch => {
   dispatch({ type: actionTypes.SIGNUP_USER, payload: response.data });
 };
 
-export const setCurrentUser = user => {
-  return {
-    type: actionTypes.SET_CURRENT_USER,
-    user
-  };
+export const signout = () => async dispatch => {
+  await api.get("/api/signout");
+  dispatch({ type: actionTypes.SIGNOUT_USER });
+};
+
+// user
+export const setCurrentUser = userId => async dispatch => {
+  const response = await api.get(`/api/user/${userId}`);
+  dispatch({ type: actionTypes.SET_CURRENT_USER, payload: response.data });
+};
+
+// book
+
+export const createBook = (userId, formValues) => async dispatch => {
+  const response = await api.post(`/api/books/${userId}`, formValues);
+  dispatch({ type: actionTypes.CREATE_BOOK, payload: response.data });
+};
+
+export const fetchBooks = userId => async dispatch => {
+  const response = await api.get(`/api/books/${userId}`);
+  console.log(response);
+  dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
+};
+
+export const fetchBook = (userId, bookId) => async dispatch => {
+  const response = await api.get(`/api/books/${userId}/${bookId}`);
+  dispatch({ type: actionTypes.FETCH_BOOK, payload: response.data });
+};
+
+export const deleteBook = (userId, bookId) => async dispatch => {
+  await api.delete(`/api/books/${userId}/${bookId}`);
+  dispatch({ type: actionTypes.DELETE_MEMO });
+};
+
+export const updateBook = (userId, bookId, formValues) => async dispatch => {
+  const response = await api.put(`/api/books/${userId}/${bookId}`, formValues);
+  dispatch({ type: actionTypes.EDIT_BOOK, payload: response.data });
+};
+
+// memo
+
+export const showMemos = (userId, bookId) => async dispatch => {
+  const response = await api.get(`api/books/${userId}/${bookId}/memo`);
+  dispatch({ type: actionTypes.FETCH_MEMOS, payload: response.data });
+};
+
+export const createMemo = (userId, bookId, formValues) => async dispatch => {
+  const response = await api.post(
+    `api/books/${userId}/${bookId}/memo`,
+    formValues
+  );
+  dispatch({ type: actionTypes.CREATE_MEMO, payload: response.data });
+};
+
+export const deleteMemo = (userId, bookId, memoId) => async dispatch => {
+  await api.delete(`api/books/${userId}/${bookId}/memo/${memoId}`);
+  dispatch({ type: actionTypes.DELETE_MEMO });
 };

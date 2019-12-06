@@ -1,12 +1,19 @@
 import React, { Component } from "react";
-// import BookTable from "./table/BookTable";
+import BookTable from "./table/BookTable";
 import CreateBook from "./book/CreateBook";
 import BookInfo from "./book/BookInfo";
-import UserPage from "./user/UserPage";
+import GraphList from "./user/GraphList";
 
 class Content extends Component {
   render() {
-    return <UserPage />;
+    return (
+      <>
+        <GraphList />
+        <CreateBook />
+        <BookInfo />
+        <BookTable />
+      </>
+    );
   }
 }
 

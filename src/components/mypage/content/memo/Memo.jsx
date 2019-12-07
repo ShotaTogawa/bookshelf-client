@@ -1,20 +1,23 @@
-import React, { Component, Fragment } from "react";
-import { Comment, Button } from "semantic-ui-react";
+import React, { Component } from "react";
+import CreateMemo from "./CreateMemo";
+import { Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { showMemos, deleteMemo } from "../../../../actions";
 import Spinner from "../../../../spinner/Spinner";
 import history from "../../../../history";
 
-class ShowMemo extends Component {
+class Memo extends Component {
   state = {
     memo: "",
     loading: false
   };
 
   componentDidMount() {
-    const bookId = this.props.bookId;
-    const userId = this.props.userId;
-    this.props.showMemos(userId, bookId);
+    // const bookId = this.props.bookId;
+    // const userId = this.props.userId;
+    const bookId = history.location.pathname.slice(6);
+    const local = JSON.parse(localStorage.getItem("user"));
+    this.props.showMemos(local.user._id, bookId);
   }
 
   handleDelete = async (event, userId, bookId, memoId) => {
@@ -32,10 +35,15 @@ class ShowMemo extends Component {
   };
 
   renderMemo = () => {
+    if (!this.props.memos || this.props.memos === 0) return <Spinner />;
+    console.log("hoge");
+    console.log(this.props.memos);
     return this.props.memos.map(data => {
+      console.log("here");
+      console.log(data);
       return data.map(memo => {
         return (
-          <Comment.Group>
+          <Comment.Group key={memo._id}>
             <Comment>
               <Comment.Content>
                 <Comment.Text>{memo.memo}</Comment.Text>
@@ -64,13 +72,13 @@ class ShowMemo extends Component {
     });
   };
   render() {
-    return !this.state.loading ? (
+    console.log(this.props.memos);
+    return (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>
         {this.renderMemo()}
+        <CreateMemo bookId={this.props.bookId} userId={this.props.userId} />
       </div>
-    ) : (
-      <Spinner />
     );
   }
 }
@@ -81,4 +89,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { showMemos, deleteMemo })(ShowMemo);
+export default connect(mapStateToProps, { showMemos, deleteMemo })(Memo);

@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createMemo } from "../../../../actions";
+import Spinner from "../../../../spinner/Spinner";
 import history from "../../../../history";
 
 class CreateMemo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      memo: ""
+      memo: "",
+      loading: false
     };
   }
 
@@ -21,17 +23,25 @@ class CreateMemo extends Component {
     const bookId = this.props.bookId;
     const userId = this.props.userId;
     const { memo } = this.state;
+    this.setState({ loading: true });
 
     await this.props.createMemo(userId, bookId, {
       memo,
       bookId: bookId,
       userId: userId
     });
-    history.push(`book/${bookId}`);
+    try {
+      this.setState({ loading: false });
+      history.push(`/book/${bookId}`);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  render() {
-    console.log(this.state);
+  renderForm = () => {
+    if (this.state.loading) {
+      return <Spinner />;
+    }
     return (
       <Form reply onSubmit={this.handleSubmit}>
         <Form.TextArea
@@ -47,6 +57,10 @@ class CreateMemo extends Component {
         />
       </Form>
     );
+  };
+
+  render() {
+    return this.renderForm();
   }
 }
 

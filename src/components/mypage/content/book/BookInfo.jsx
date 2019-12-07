@@ -3,33 +3,39 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../../actions";
 import BookDetail from "./BookDetail";
-import ShowMemo from "../memo/ShowMemo";
+import Memo from "../memo/Memo";
 import CreateMemo from "../memo/CreateMemo";
 import SideMenu from "../../sidemenu/SideMenu";
+import Spinner from "../../../../spinner/Spinner";
 
 class BookInfo extends Component {
   componentDidMount() {
-    this.props.fetchBook(
-      "5dd4c61ac11600fea94c6a22",
-      "5de606a35fe2ca2dca125a99"
-    );
+    const local = JSON.parse(localStorage.getItem("user"));
+    const bookId = this.props.location.pathname.slice(6);
+    this.props.fetchBook(local.user._id, bookId);
   }
-
   renderBook = () => {
-    console.log(this.props.book);
-    return this.props.book.map(book => {
-      return (
-        <>
-          <Grid.Column width={5}>
+    // return this.props.book.map(book => {
+    const { book } = this.props;
+    if (!book || book.length === 0) return <Spinner />;
+    // const book = this.props.book[1];
+    return (
+      <>
+        {/* <Grid.Column width={5}>
             <BookDetail book={book} />
           </Grid.Column>
           <Grid.Column width={7}>
-            <ShowMemo bookId={book._id} userId={book.userId} />
-            <CreateMemo bookId={book._id} userId={book.userId} />
-          </Grid.Column>
-        </>
-      );
-    });
+            <Memo bookId={book._id} userId={book.userId} />
+          </Grid.Column> */}
+        <Grid.Column width={5}>
+          <BookDetail book={book[0]} />
+        </Grid.Column>
+        <Grid.Column width={7}>
+          <Memo bookId={book[0]._id} userId={book[0].userId} />
+        </Grid.Column>
+      </>
+    );
+    // });
   };
 
   render() {
@@ -43,9 +49,10 @@ class BookInfo extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.book);
+  console.log(state);
   return {
-    book: Object.values(state.book)
+    book: Object.values(state.book),
+    user: state.user.user
   };
 };
 

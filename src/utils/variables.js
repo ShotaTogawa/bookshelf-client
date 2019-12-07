@@ -64,7 +64,8 @@ export const menus = [
     submenus: [
       { url: "/books", title: "List", icon: "fas fa-th-list" },
       { url: "/book", title: "Register", icon: "fas fa-plus" },
-      { url: "#", title: "TimeLine", icon: "fas fa-stream" }
+      { url: "/book/search", title: "Search", icon: "fas fa-search" },
+      { url: "/timeline", title: "TimeLine", icon: "fas fa-stream" }
     ]
   }
 ];

@@ -13,9 +13,11 @@ class Memo extends Component {
   };
 
   componentDidMount() {
-    const bookId = this.props.bookId;
-    const userId = this.props.userId;
-    this.props.showMemos(userId, bookId);
+    // const bookId = this.props.bookId;
+    // const userId = this.props.userId;
+    const bookId = history.location.pathname.slice(6);
+    const local = JSON.parse(localStorage.getItem("user"));
+    this.props.showMemos(local.user._id, bookId);
   }
 
   handleDelete = async (event, userId, bookId, memoId) => {
@@ -33,9 +35,12 @@ class Memo extends Component {
   };
 
   renderMemo = () => {
-    console.log("memooooooo", this.props.memos);
-    if (!this.props.memos) return <Spinner />;
-    return this.props.memos.map((data, i) => {
+    if (!this.props.memos || this.props.memos === 0) return <Spinner />;
+    console.log("hoge");
+    console.log(this.props.memos);
+    return this.props.memos.map(data => {
+      console.log("here");
+      console.log(data);
       return data.map(memo => {
         return (
           <Comment.Group key={memo._id}>

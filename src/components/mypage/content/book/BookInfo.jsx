@@ -18,7 +18,6 @@ class BookInfo extends Component {
     // return this.props.book.map(book => {
     const { book } = this.props;
     if (!book || book.length === 0) return <Spinner />;
-    console.log("boooooooooooooooooks", this.props.book);
     // const book = this.props.book[1];
     return (
       <>

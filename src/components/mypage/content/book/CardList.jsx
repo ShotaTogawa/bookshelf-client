@@ -4,13 +4,11 @@ import { Card } from "semantic-ui-react";
 
 const renderCards = cards => {
   return cards.map(card => {
-    console.log(card);
     return <BookCard key={card._id} card={card} />;
   });
 };
 
 const CardList = ({ cards }) => {
-  console.log(cards);
   return (
     <div
       style={{

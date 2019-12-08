@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CardList from "./CardList";
 import SideMenu from "../../sidemenu/SideMenu";
-import { Search, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 const searchResults = [
   {
@@ -55,6 +55,14 @@ const searchResults = [
 ];
 
 class SearchBook extends Component {
+  state = {
+    searchValue: ""
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -63,7 +71,21 @@ class SearchBook extends Component {
         <Grid.Column width={12} style={{ marginTop: "30px" }}>
           <div>
             <h1>Search</h1>
-            <Search />
+            <input
+              class="fas"
+              name="searchValue"
+              type="search"
+              placeholder="&#xf002; Search Book"
+              onChange={this.handleChange}
+              style={{
+                padding: "10px 10px 10px 20px",
+                borderRadius: "30px",
+                border: "2px solid  #878787",
+                fontSize: "inherit",
+                // fontFamily: "inherit",
+                color: "#373737"
+              }}
+            />
             <CardList cards={searchResults} />
           </div>
         </Grid.Column>

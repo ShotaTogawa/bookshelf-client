@@ -79,8 +79,9 @@ class BookTable extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    books: state.book.books,
+    books: Object.values(state.book),
     currentUser: state.user.user
   };
 };

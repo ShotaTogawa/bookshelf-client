@@ -13,7 +13,6 @@ const renderTableData = books => {
     return <Spinner />;
   }
   return books.map(data => {
-    const progress = data.read_pages / data.page_nums;
     return (
       <Table.Body>
         <Table.Row>
@@ -30,7 +29,9 @@ const renderTableData = books => {
           </Table.Cell>
           <Table.Cell>{data.genre}</Table.Cell>
           <Table.Cell>{data.author}</Table.Cell>
-          <Table.Cell>{progress}</Table.Cell>
+          <Table.Cell>
+            {Math.round((data.read_pages / data.page_nums) * 100) + "%"}
+          </Table.Cell>
           <Table.Cell>{moment(data.startDate).format("MMM D YYYY")}</Table.Cell>
           <Table.Cell>
             <StarRating

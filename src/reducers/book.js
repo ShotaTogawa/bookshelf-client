@@ -23,7 +23,8 @@ const book_reducer = (state = {}, action) => {
     case actionTypes.UPDATE_END_DATE:
       return { ...state, [action.payload._id]: action.payload };
     case actionTypes.UPDATE_READ_PAGES:
-      return { ...state, [action.payload.id]: action.payload };
+      console.log(action.payload);
+      return { ...state, [action.payload._id]: action.payload };
     default:
       return state;
   }

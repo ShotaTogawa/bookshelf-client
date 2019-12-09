@@ -65,7 +65,6 @@ class SearchBook extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <Grid>
         <SideMenu />

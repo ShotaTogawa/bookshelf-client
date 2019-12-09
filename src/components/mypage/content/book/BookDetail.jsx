@@ -33,7 +33,6 @@ class BookDetail extends Component {
   };
 
   renderBookInfo = book => {
-    console.log("bookDetail", book);
     // if (!book) return <Spinner />;
     return (
       <Table basic="very">
@@ -145,7 +144,6 @@ class BookDetail extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div style={{ marginTop: "30px" }}>
         {this.state.loading ? <Spinner /> : ""}

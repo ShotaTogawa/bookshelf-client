@@ -29,7 +29,11 @@ const renderTableData = books => {
           <Table.Cell>{data.author}</Table.Cell>
           <Table.Cell>{moment(data.endDate).format("MMM D YYYY")}</Table.Cell>
           <Table.Cell>
-            <StarRating evaluation={data.evaluation} />
+            <StarRating
+              evaluation={data.evaluation}
+              userId={data.userId}
+              bookId={data._id}
+            />
           </Table.Cell>
           <Table.Cell>TODO: make function to upload image</Table.Cell>
         </Table.Row>

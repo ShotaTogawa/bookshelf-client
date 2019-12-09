@@ -16,6 +16,10 @@ export const DELETE_BOOK = "DELETE_BOOK";
 export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 export const GET_IMAGE = "GET_IMAGE";
 export const GET_TIMELINE = "GET_TIMELINE";
+export const UPDATE_EVALUATION = "UPDATE_EVALUATION";
+export const UPDATE_START_DATE = "UPDATE_START_DATE";
+export const UPDATE_END_DATE = "UPDATE_END_DATE";
+export const UPDATE_READ_PAGES = "UPDATE_READ_PAGES";
 
 export const CREATE_MEMO = "CREATE_MEMO";
 export const FETCH_MEMO = "FETCH_MEMO";

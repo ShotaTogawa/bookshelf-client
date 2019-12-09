@@ -57,6 +57,46 @@ export const getTimeline = userId => async dispatch => {
   dispatch({ type: actionTypes.GET_TIMELINE, payload: response.data });
 };
 
+export const updateEvaluation = (
+  userId,
+  bookId,
+  evaluation
+) => async dispatch => {
+  const response = await api.put(
+    `/api/book/evaluation/${userId}/${bookId}`,
+    evaluation
+  );
+  dispatch({ type: actionTypes.UPDATE_EVALUATION, payload: response.data });
+};
+
+export const updateStartDate = (userId, bookId, values) => async dispatch => {
+  const response = await api.put(
+    `/api/book/startdate/${userId}/${bookId}`,
+    values
+  );
+  dispatch({ type: actionTypes.UPDATE_START_DATE, payload: response.data });
+};
+
+export const updateEndDate = (userId, bookId, values) => async dispatch => {
+  const response = await api.put(
+    `/api/book/enddate/${userId}/${bookId}`,
+    values
+  );
+  dispatch({ type: actionTypes.UPDATE_END_DATE, payload: response.data });
+};
+
+export const updateReadPages = (
+  userId,
+  bookId,
+  read_pages
+) => async dispatch => {
+  const response = await api.put(
+    `/api/book/read_pages/${userId}/${bookId}`,
+    read_pages
+  );
+  dispatch({ type: actionTypes.UPDATE_READ_PAGES, payload: response.data });
+};
+
 // memo
 
 export const showMemos = (userId, bookId) => async dispatch => {

@@ -3,6 +3,7 @@ import Spinner from "../../../../spinner/Spinner";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Table, Image } from "semantic-ui-react";
+import DateForm from "./sub-components/DateForm";
 
 const renderTableData = books => {
   // const local = JSON.parse(localStorage.getItem("user"));
@@ -28,7 +29,13 @@ const renderTableData = books => {
           <Table.Cell>{data.author}</Table.Cell>
           <Table.Cell>{data.page_nums}</Table.Cell>
           <Table.Cell>{moment(data.createdAt).format("MMM D YYYY")}</Table.Cell>
-          <Table.Cell>TODO: make function to update start date</Table.Cell>
+          <Table.Cell>
+            <DateForm
+              userId={data.userId}
+              bookId={data._id}
+              status={data.status}
+            />
+          </Table.Cell>
           <Table.Cell>TODO: make function to upload image</Table.Cell>
         </Table.Row>
       </Table.Body>

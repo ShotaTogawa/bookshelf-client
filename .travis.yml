@@ -6,4 +6,4 @@ before_install:
   - docker build -t togasho/bookshelf-client -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true togasho/bookshelf-client npm run test -- --coverage
+  - docker run -e CI=true togasho/bookshelf-client npm run test

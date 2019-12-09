@@ -56,7 +56,8 @@ const searchResults = [
 
 class SearchBook extends Component {
   state = {
-    searchValue: ""
+    searchValue: "",
+    loading: false
   };
 
   handleChange = event => {
@@ -82,11 +83,10 @@ class SearchBook extends Component {
                 borderRadius: "30px",
                 border: "2px solid  #878787",
                 fontSize: "inherit",
-                // fontFamily: "inherit",
                 color: "#373737"
               }}
             />
-            <CardList cards={searchResults} />
+            <CardList cards={searchResults} loading={this.state.loading} />
           </div>
         </Grid.Column>
       </Grid>

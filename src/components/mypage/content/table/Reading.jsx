@@ -5,6 +5,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { Table, Image } from "semantic-ui-react";
 import DateForm from "./sub-components/DateForm";
+import UpdateReadPages from "./sub-components/UpdateReadPages";
 
 const renderTableData = books => {
   // const local = JSON.parse(localStorage.getItem("user"));
@@ -44,6 +45,7 @@ const renderTableData = books => {
               bookId={data._id}
               status={data.status}
             />
+            <UpdateReadPages userId={data.userId} bookId={data._id} />
             TODO: Make status change func
           </Table.Cell>
         </Table.Row>

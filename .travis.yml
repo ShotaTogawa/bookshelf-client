@@ -4,6 +4,20 @@ services:
 
 before_install:
   - docker build -t togasho/bookshelf-client -f Dockerfile.dev .
+# script:
+#   - docker run -e CI=true togasho/bookshelf-client npm run test
 
-script:
-  - docker run -e CI=true togasho/bookshelf-client npm run test
+# deploy:
+#   edge: true
+#   provider: elasticbeanstalk
+#   region: "us-west-2"
+#   app: "elasticbeanstalkで登録した名前"
+#   env: "Docker-env"
+#   bucket_name: "s3のbucket_name"
+#   bucket_path: "appの名前"
+#   on:
+#      branch: master
+#   # travisのenv keyに登録する
+#   access_key_id: $IAMのAccess_key
+#   secret_access_key:
+#     secure: $IAMのSecret_key

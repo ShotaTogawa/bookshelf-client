@@ -36,11 +36,7 @@ class Memo extends Component {
 
   renderMemo = () => {
     if (!this.props.memos || this.props.memos === 0) return <Spinner />;
-    console.log("hoge");
-    console.log(this.props.memos);
     return this.props.memos.map(data => {
-      console.log("here");
-      console.log(data);
       return data.map(memo => {
         return (
           <Comment.Group key={memo._id}>
@@ -72,7 +68,6 @@ class Memo extends Component {
     });
   };
   render() {
-    console.log(this.props.memos);
     return (
       <div style={{ marginTop: "30px" }}>
         <h2>Memo</h2>

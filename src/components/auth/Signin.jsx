@@ -52,7 +52,6 @@ class Signin extends Component {
         this.setState({ loading: false });
         history.push("/user");
       } catch (e) {
-        console.log(e);
         this.setState({ loading: false });
       }
     }

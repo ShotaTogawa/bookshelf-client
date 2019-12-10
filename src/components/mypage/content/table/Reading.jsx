@@ -4,6 +4,8 @@ import StarRating from "../../../common/StarRating";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { Table, Image } from "semantic-ui-react";
+import DateForm from "./sub-components/DateForm";
+import UpdateReadPages from "./sub-components/UpdateReadPages";
 
 const renderTableData = books => {
   // const local = JSON.parse(localStorage.getItem("user"));
@@ -11,7 +13,6 @@ const renderTableData = books => {
     return <Spinner />;
   }
   return books.map(data => {
-    const progress = data.read_pages / data.page_nums;
     return (
       <Table.Body>
         <Table.Row>
@@ -28,19 +29,38 @@ const renderTableData = books => {
           </Table.Cell>
           <Table.Cell>{data.genre}</Table.Cell>
           <Table.Cell>{data.author}</Table.Cell>
-          <Table.Cell>{progress}</Table.Cell>
+          <Table.Cell>
+            {Math.round((data.read_pages / data.page_nums) * 100) + "%"}
+          </Table.Cell>
           <Table.Cell>{moment(data.startDate).format("MMM D YYYY")}</Table.Cell>
           <Table.Cell>
-            <StarRating evaluation={data.evaluation} />
+            <StarRating
+              evaluation={data.evaluation}
+              userId={data.userId}
+              bookId={data._id}
+            />
           </Table.Cell>
-          <Table.Cell>TODO: Make status change func</Table.Cell>
+          <Table.Cell>
+            <DateForm
+              userId={data.userId}
+              bookId={data._id}
+              status={data.status}
+            />
+            <UpdateReadPages userId={data.userId} bookId={data._id} />
+            TODO: Make status change func
+          </Table.Cell>
         </Table.Row>
       </Table.Body>
     );
   });
 };
 
-const Reading = ({ books }) => {
-  return renderTableData(books);
+const Reading = ({ books, loadButton }) => {
+  return (
+    <>
+      {renderTableData(books)}
+      {loadButton()}
+    </>
+  );
 };
 export default Reading;

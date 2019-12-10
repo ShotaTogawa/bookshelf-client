@@ -41,11 +41,9 @@ export const fetchBooks = (
   status = "beforeReading",
   skip = 0
 ) => async dispatch => {
-  console.log(status, skip);
   const response = await api.get(
     `/api/books/${userId}?status=${status}&skip=${skip}`
   );
-  console.log("hoge", response.data);
   dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
 };
 

@@ -24,7 +24,6 @@ class StarRating extends Component {
   };
 
   render() {
-    console.log(this.state.evaluation);
     return (
       <>
         {this.state.loading ? (

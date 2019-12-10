@@ -13,7 +13,7 @@ import {
 import { Table, Menu, Grid, Icon, Button } from "semantic-ui-react";
 
 class BookTable extends Component {
-  state = { activeItem: "reading", skip: 0 };
+  state = { activeItem: "beforeReading", skip: 0 };
 
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
@@ -48,24 +48,26 @@ class BookTable extends Component {
 
   loadButton = () => {
     return (
-      <Button.Group>
-        <Button icon>
-          <Icon
-            name="fas fa-arrow-left"
-            onClick={() =>
-              this.state.skip <= 0
-                ? 0
-                : this.setState({ skip: this.state.skip - 5 })
-            }
-          />
-        </Button>
-        <Button icon>
-          <Icon
-            name="fas fa-arrow-right"
-            onClick={() => this.setState({ skip: this.state.skip + 5 })}
-          />
-        </Button>
-      </Button.Group>
+      <div>
+        <Button.Group>
+          <Button icon>
+            <Icon
+              className="fas fa-arrow-left"
+              onClick={() =>
+                this.state.skip <= 0
+                  ? 0
+                  : this.setState({ skip: this.state.skip - 5 })
+              }
+            />
+          </Button>
+          <Button icon>
+            <Icon
+              className="fas fa-arrow-right"
+              onClick={() => this.setState({ skip: this.state.skip + 5 })}
+            />
+          </Button>
+        </Button.Group>
+      </div>
     );
   };
 
@@ -115,8 +117,9 @@ class BookTable extends Component {
 
 const mapStateToProps = state => {
   console.log("hello", Object.values(state.book)[0]);
+  console.log(state.book.books);
   return {
-    books: Object.values(state.book),
+    books: state.book.books,
     currentUser: state.user.user
   };
 };

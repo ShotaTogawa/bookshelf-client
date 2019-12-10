@@ -97,6 +97,14 @@ export const updateReadPages = (
   dispatch({ type: actionTypes.UPDATE_READ_PAGES, payload: response.data });
 };
 
+export const searchBooks = (userId, params) => async dispatch => {
+  const response = await api.get(
+    `/api/books/search/${userId}?search=${params}`
+  );
+  console.log(response.data);
+  dispatch({ type: actionTypes.SEARCH_BOOKS, payload: response.data });
+};
+
 // memo
 
 export const showMemos = (userId, bookId) => async dispatch => {

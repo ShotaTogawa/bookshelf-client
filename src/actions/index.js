@@ -30,9 +30,22 @@ export const createBook = (userId, formValues) => async dispatch => {
   dispatch({ type: actionTypes.CREATE_BOOK, payload: response.data });
 };
 
-export const fetchBooks = userId => async dispatch => {
-  const response = await api.get(`/api/books/${userId}`);
-  console.log(response);
+// export const fetchBooks = userId => async dispatch => {
+//   const response = await api.get(`/api/books/${userId}`);
+//   console.log(response);
+//   dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
+// };
+
+export const fetchBooks = (
+  userId,
+  status = "beforeReading",
+  skip = 0
+) => async dispatch => {
+  console.log(status, skip);
+  const response = await api.get(
+    `/api/books/${userId}?status=${status}&skip=${skip}`
+  );
+  console.log("hoge", response.data);
   dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
 };
 

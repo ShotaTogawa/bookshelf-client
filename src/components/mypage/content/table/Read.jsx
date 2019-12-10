@@ -22,9 +22,9 @@ const renderTableData = books => {
               />
             </Link>
           </Table.Cell>
-          <Link to={`/book/${data._id}`}>
-            <Table.Cell>{data.name}</Table.Cell>
-          </Link>
+          <Table.Cell>
+            <Link to={`/book/${data._id}`}>{data.name}</Link>
+          </Table.Cell>
           <Table.Cell>{data.genre}</Table.Cell>
           <Table.Cell>{data.author}</Table.Cell>
           <Table.Cell>{moment(data.endDate).format("MMM D YYYY")}</Table.Cell>
@@ -42,8 +42,13 @@ const renderTableData = books => {
   });
 };
 
-const Read = ({ books }) => {
-  return renderTableData(books);
+const Read = ({ books, loadButton }) => {
+  return (
+    <>
+      {renderTableData(books)}
+      {loadButton()}
+    </>
+  );
 };
 
 export default Read;

@@ -10,24 +10,32 @@ import {
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table, Menu, Grid } from "semantic-ui-react";
+import { Table, Menu, Grid, Icon, Button } from "semantic-ui-react";
 
 class BookTable extends Component {
-  state = { activeItem: "Reading" };
+  state = { activeItem: "reading", skip: 0 };
 
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
-    this.props.fetchBooks(local.user._id);
+    this.props.fetchBooks(local.user._id, this.state.activeItem);
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = async (e, { name }) => {
+    const local = JSON.parse(localStorage.getItem("user"));
+    await this.setState({ activeItem: name });
+    await this.props.fetchBooks(
+      local.user._id,
+      this.state.activeItem,
+      this.state.skip
+    );
+  };
 
   renderTableHeader = () => {
-    if (this.state.activeItem === "Reading") {
+    if (this.state.activeItem === "reading") {
       return tableHeaderReading.map(header => {
         return <Table.HeaderCell>{header}</Table.HeaderCell>;
       });
-    } else if (this.state.activeItem === "Before") {
+    } else if (this.state.activeItem === "beforeReading") {
       return tableHeaderBefore.map(header => {
         return <Table.HeaderCell>{header}</Table.HeaderCell>;
       });
@@ -38,25 +46,49 @@ class BookTable extends Component {
     }
   };
 
+  loadButton = () => {
+    return (
+      <Button.Group>
+        <Button icon>
+          <Icon
+            name="fas fa-arrow-left"
+            onClick={() =>
+              this.state.skip <= 0
+                ? 0
+                : this.setState({ skip: this.state.skip - 5 })
+            }
+          />
+        </Button>
+        <Button icon>
+          <Icon
+            name="fas fa-arrow-right"
+            onClick={() => this.setState({ skip: this.state.skip + 5 })}
+          />
+        </Button>
+      </Button.Group>
+    );
+  };
+
   render() {
+    console.log(this.state);
     return (
       <Grid>
         <SideMenu />
         <Grid.Column width={12} style={{ marginTop: "30px" }}>
           <Menu tabular>
             <Menu.Item
-              name="Reading"
-              active={this.state.activeItem === "Reading"}
+              name="reading"
+              active={this.state.activeItem === "reading"}
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name="Before"
-              active={this.state.activeItem === "Before"}
+              name="beforeReading"
+              active={this.state.activeItem === "beforeReading"}
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name="Read"
-              active={this.state.activeItem === "Read"}
+              name="read"
+              active={this.state.activeItem === "read"}
               onClick={this.handleItemClick}
             />
           </Menu>
@@ -64,12 +96,15 @@ class BookTable extends Component {
             <Table.Header>
               <Table.Row>{this.renderTableHeader()}</Table.Row>
             </Table.Header>
-            {this.state.activeItem === "Reading" ? (
-              <Reading books={this.props.books} />
-            ) : this.state.activeItem === "Read" ? (
-              <Read books={this.props.books} />
+            {this.state.activeItem === "reading" ? (
+              <Reading books={this.props.books} loadButton={this.loadButton} />
+            ) : this.state.activeItem === "read" ? (
+              <Read books={this.props.books} loadButton={this.loadButton} />
             ) : (
-              <BeforeReading books={this.props.books} />
+              <BeforeReading
+                books={this.props.books}
+                loadButton={this.loadButton}
+              />
             )}
           </Table>
         </Grid.Column>
@@ -79,7 +114,7 @@ class BookTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log("hello", Object.values(state.book)[0]);
   return {
     books: Object.values(state.book),
     currentUser: state.user.user

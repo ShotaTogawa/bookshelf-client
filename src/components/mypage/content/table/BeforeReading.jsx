@@ -43,8 +43,13 @@ const renderTableData = books => {
   });
 };
 
-const BeforeReading = ({ books }) => {
-  return renderTableData(books);
+const BeforeReading = ({ books, loadButton }) => {
+  return (
+    <>
+      {renderTableData(books)}
+      {loadButton()}
+    </>
+  );
 };
 
 export default BeforeReading;

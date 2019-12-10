@@ -55,7 +55,12 @@ const renderTableData = books => {
   });
 };
 
-const Reading = ({ books }) => {
-  return renderTableData(books);
+const Reading = ({ books, loadButton }) => {
+  return (
+    <>
+      {renderTableData(books)}
+      {loadButton()}
+    </>
+  );
 };
 export default Reading;

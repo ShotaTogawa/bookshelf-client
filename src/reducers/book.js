@@ -4,9 +4,14 @@ import _ from "lodash";
 const book_reducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.CREATE_BOOK:
-      return { ...state, [action.payload._id]: action.payload };
+      return { ...state, ...action.payload };
     case actionTypes.FETCH_BOOKS:
+      console.log(action.payload);
       return { ...state, ..._.mapKeys(action.payload, "_id") };
+    // return {
+    //   ...state,
+    //   [action.payload._id]: action.payload
+    // };
     case actionTypes.FETCH_BOOK:
       console.log({ ...state, [action.payload._id]: action.payload });
       return { ...state, [action.payload._id]: action.payload };

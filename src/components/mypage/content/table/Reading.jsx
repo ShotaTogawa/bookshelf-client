@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 import { Table, Image } from "semantic-ui-react";
 import DateForm from "./sub-components/DateForm";
 import UpdateReadPages from "./sub-components/UpdateReadPages";
+import UpdateEvaluation from "./sub-components/UpdateEvaluation";
 
 const renderTableData = books => {
-  // const local = JSON.parse(localStorage.getItem("user"));
   if (!books) {
     return <Spinner />;
   }
   return books.map(data => {
-    console.log(data);
     return (
       <Table.Body>
         <Table.Row>
@@ -35,11 +34,7 @@ const renderTableData = books => {
           </Table.Cell>
           <Table.Cell>{moment(data.startDate).format("MMM D YYYY")}</Table.Cell>
           <Table.Cell>
-            <StarRating
-              evaluation={data.evaluation}
-              userId={data.userId}
-              bookId={data._id}
-            />
+            <StarRating evaluation={data.evaluation} />
           </Table.Cell>
           <Table.Cell>
             <DateForm
@@ -48,6 +43,7 @@ const renderTableData = books => {
               status={data.status}
             />
             <UpdateReadPages userId={data.userId} bookId={data._id} />
+            <UpdateEvaluation userId={data.userId} bookId={data._id} />
             TODO: Make status change func
           </Table.Cell>
         </Table.Row>

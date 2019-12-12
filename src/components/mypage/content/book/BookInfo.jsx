@@ -28,10 +28,10 @@ class BookInfo extends Component {
             <Memo bookId={book._id} userId={book.userId} />
           </Grid.Column> */}
         <Grid.Column width={5}>
-          <BookDetail book={book[0]} />
+          <BookDetail book={book} />
         </Grid.Column>
         <Grid.Column width={7}>
-          <Memo bookId={book[0]._id} userId={book[0].userId} />
+          <Memo bookId={book._id} userId={book.userId} />
         </Grid.Column>
       </>
     );
@@ -49,9 +49,9 @@ class BookInfo extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("book", state);
+  console.log("book", state.book.book);
   return {
-    book: Object.values(state.book),
+    book: state.book.book,
     user: state.user.user
   };
 };

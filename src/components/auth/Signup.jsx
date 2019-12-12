@@ -3,6 +3,7 @@ import classes from "./auth.css";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { isAuthenticated } from ".";
+import history from "../../history";
 
 import { signup } from "../../actions";
 import Spinner from "../../spinner/Spinner";
@@ -63,22 +64,19 @@ class Signup extends Component {
       </small>
     ));
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({ errors: [] });
     const { name, email, password } = this.state;
     if (this.isFormValid(this.state)) {
       this.setState({ loading: true, error: [] });
-      this.props
-        .signup({ name, email, password })
-        .then(() => {
-          this.setState({ loading: false });
-        })
-        .catch(e => {
-          this.setState({
-            loading: false
-          });
-        });
+      await this.props.signup({ name, email, password });
+      try {
+        this.setState({ loading: false });
+        history.push("/user");
+      } catch (e) {
+        this.setState({ loading: false });
+      }
     }
   };
 

@@ -15,11 +15,16 @@ class CreateBook extends Component {
     price: "",
     page_nums: "",
     publish: false,
+    file: null,
     errors: []
   };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleChangeFile = event => {
+    this.setState({ file: event.target.files[0] });
   };
 
   isFormEmpty = ({ name, genre, author, page_nums }) => {
@@ -130,6 +135,14 @@ class CreateBook extends Component {
             label={<label>Do you want to introduce this book in public?</label>}
             onClick={e => this.setState({ publish: !this.state.publish })}
           />
+          <Form.Field>
+            <label>Image upload</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={this.handleChangeFile}
+            />
+          </Form.Field>
           <button className="ui button" type="submit">
             Submit
           </button>
@@ -138,6 +151,7 @@ class CreateBook extends Component {
     </Grid>
   );
   render() {
+    console.log(this.state.file);
     return <div>{this.renderForm()}</div>;
   }
 }

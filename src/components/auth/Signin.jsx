@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import classes from "./auth.css";
 import { signin } from "../../actions";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Spinner from "../../spinner/Spinner";
-import { isAuthenticated } from "./";
 import history from "../../history";
 
 class Signin extends Component {

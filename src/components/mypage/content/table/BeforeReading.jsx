@@ -20,7 +20,6 @@ class BeforeReading extends Component {
       return <Spinner />;
     }
     return books.map(data => {
-      console.log(data.image);
       return (
         <Table.Body>
           <Table.Row>

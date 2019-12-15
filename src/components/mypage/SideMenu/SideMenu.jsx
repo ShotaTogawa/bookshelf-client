@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import defaultImage from "../../assets/user.svg";
 import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
-import { Grid, Image } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { signout, setCurrentUser } from "../../../actions";
 import ImageModal from "../../mypage/content/table/sub-components/ImageModal";
 import history from "../../../history";

@@ -5,7 +5,6 @@ import { createBook } from "../../../../actions";
 import { Form, Grid, Message, Checkbox } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 import history from "../../../../history";
-import { Redirect } from "react-router-dom";
 
 class CreateBook extends Component {
   state = {

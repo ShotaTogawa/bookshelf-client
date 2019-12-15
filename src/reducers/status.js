@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/type";
-import _ from "lodash";
 
 const status_reducer = (state = {}, action) => {
   switch (action.type) {

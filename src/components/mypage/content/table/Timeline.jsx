@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Feed, Grid, Image } from "semantic-ui-react";
+import { Feed, Grid } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 import { getTimeline } from "../../../../actions";
 import { connect } from "react-redux";
@@ -26,6 +26,7 @@ class Timeline extends Component {
                       data.userId.avatar
                     : defaultImage
                 }
+                alt={data.name}
               />
             </Feed.Label>
             <Feed.Content>
@@ -41,15 +42,6 @@ class Timeline extends Component {
                       : ""
                   }
                 />
-                {/* <Image
-                src={
-                  data.image
-                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
-                      data.image
-                    : defaultBookImage
-                }
-                size="tiny"
-              /> */}
               </Feed.Extra>
               <Feed.Date>{data.createdAt}</Feed.Date>
             </Feed.Content>

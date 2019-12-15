@@ -25,8 +25,7 @@ class ImageModal extends Component {
     });
   };
 
-  uploadFile = async event => {
-    event.preventDefault();
+  uploadFile = async () => {
     const { userId, bookId } = this.props;
 
     if (bookId) {

@@ -6,54 +6,12 @@ import SideMenu from "../../sidemenu/SideMenu";
 import { connect } from "react-redux";
 import { setCurrentUser, calculateStatus } from "../../../../actions";
 
-const genreCounter = {
-  Biographies: 1,
-  Technology: 2,
-  Fitness: 2,
-  Health: 1,
-  Novel: 1
-};
-
 class UserPage extends Component {
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
     this.props.setCurrentUser(local.user._id);
     this.props.calculateStatus(local.user._id);
   }
-
-  // countGenres = async books => {
-  //   const counter = {};
-  //   await books.map(book => {
-  //     if (counter[book.genre]) {
-  //       counter[book.genre] += 1;
-  //     } else {
-  //       counter[book.genre] = 1;
-  //     }
-  //   });
-  //   return counter;
-  // };
-
-  // countStatus = books => {
-  //   const counter = {};
-  //   const total = books.length;
-  //   counter["total"] = total;
-  //   books.forEach(book => {
-  //     if (counter[book.status]) {
-  //       counter[book.status] += 1;
-  //     } else {
-  //       counter[book.status] = 1;
-  //     }
-  //   });
-  //   return counter;
-  // };
-
-  // calcurateTotalPrice = books => {
-  //   const counter = { total: 0 };
-  //   books.forEach(book => {
-  //     counter["total"] += book.purchased_price;
-  //   });
-  //   return counter;
-  // };
 
   renderField = () => {
     return this.props.status.map(status => {

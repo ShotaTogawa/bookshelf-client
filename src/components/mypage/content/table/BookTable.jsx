@@ -33,22 +33,22 @@ class BookTable extends Component {
   renderTableHeader = () => {
     if (this.state.activeItem === "reading") {
       return tableHeaderReading.map(header => {
-        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+        return <Table.HeaderCell key={header}>{header}</Table.HeaderCell>;
       });
     } else if (this.state.activeItem === "beforeReading") {
       return tableHeaderBefore.map(header => {
-        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+        return <Table.HeaderCell key={header}>{header}</Table.HeaderCell>;
       });
     } else {
       return tableHeaderRead.map(header => {
-        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+        return <Table.HeaderCell key={header}>{header}</Table.HeaderCell>;
       });
     }
   };
 
   loadButton = () => {
     return (
-      <div>
+      <>
         <Button.Group>
           <Button icon>
             <Icon
@@ -67,12 +67,11 @@ class BookTable extends Component {
             />
           </Button>
         </Button.Group>
-      </div>
+      </>
     );
   };
 
   render() {
-    console.log(this.state);
     return (
       <Grid>
         <SideMenu />
@@ -116,8 +115,6 @@ class BookTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("hello", Object.values(state.book)[0]);
-  console.log(state.book.books);
   return {
     books: state.book.books,
     currentUser: state.user.user

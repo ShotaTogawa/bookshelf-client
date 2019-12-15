@@ -3,7 +3,6 @@ import * as actionTypes from "../actions/type";
 const status_reducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.CALCULATE_BOOK_STATUS:
-      console.log(action.payload);
       const genreCounter = {};
       const statusCounter = {};
       const totalCost = { total: 0 };
@@ -22,6 +21,7 @@ const status_reducer = (state = {}, action) => {
           statusCounter[book.status] = 1;
         }
         statusCounter["total"] = action.payload.length;
+        return statusCounter;
       });
 
       action.payload.map(book => {

@@ -33,6 +33,7 @@ class DateForm extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <Popup
         trigger={

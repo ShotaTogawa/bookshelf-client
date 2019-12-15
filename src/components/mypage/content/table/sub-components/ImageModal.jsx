@@ -7,7 +7,6 @@ import history from "../../../../../history";
 class ImageModal extends Component {
   state = {
     file: null,
-    authorized: ["image/jpeg", "image/png"],
     modal: false,
     imageUrl: ""
   };
@@ -63,6 +62,7 @@ class ImageModal extends Component {
 
   render() {
     const { modal, closeModal, header } = this.props;
+    console.log(this.props);
     return (
       <Modal basic open={modal} onClose={closeModal}>
         <Modal.Header>{header ? header : "Select an Image File"}</Modal.Header>

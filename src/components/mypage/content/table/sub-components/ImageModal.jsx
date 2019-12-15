@@ -63,10 +63,10 @@ class ImageModal extends Component {
   clearFile = () => this.setState({ file: null });
 
   render() {
-    const { modal, closeModal } = this.props;
+    const { modal, closeModal, header } = this.props;
     return (
       <Modal basic open={modal} onClose={closeModal}>
-        <Modal.Header>Select an Image File</Modal.Header>
+        <Modal.Header>{header ? header : "Select an Image File"}</Modal.Header>
         <Modal.Content>
           <input type="file" accept="image/*" onChange={this.onFileChange} />
         </Modal.Content>

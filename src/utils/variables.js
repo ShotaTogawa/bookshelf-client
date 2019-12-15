@@ -53,8 +53,8 @@ export const menus = [
     icon: "fas fa-user-circle",
     title: "User",
     submenus: [
-      { url: "/user", title: "Status", icon: "fas fa-list" },
-      { url: "#", title: "Edit", icon: "fas fa-user-edit" }
+      { url: "/user", title: "Status", icon: "fas fa-list" }
+      // { url: "#", title: "Edit", icon: "fas fa-user-edit" }
     ]
   },
   {

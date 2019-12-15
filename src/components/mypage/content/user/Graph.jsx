@@ -60,9 +60,6 @@ const renderActiveShape = props => {
         textAnchor={textAnchor}
         fill="#333"
       >{`${(percent * 100).toFixed(2)}%`}</text>
-      {/* <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
-      </text> */}
     </g>
   );
 };
@@ -96,15 +93,15 @@ export default class CounterPieChart extends PureComponent {
 
   render() {
     return (
-      <PieChart width={370} height={245}>
+      <PieChart width={370} height={300}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={this.dataFormat(this.props.counter)}
           cx={200}
           cy={150}
-          innerRadius={40}
-          outerRadius={60}
+          innerRadius={80}
+          outerRadius={100}
           fill="#8884d8"
           dataKey="value"
           onMouseEnter={this.onPieEnter}

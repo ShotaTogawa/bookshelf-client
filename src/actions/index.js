@@ -116,6 +116,11 @@ export const searchBooks = (userId, params) => async dispatch => {
   dispatch({ type: actionTypes.SEARCH_BOOKS, payload: response.data });
 };
 
+export const calculateStatus = userId => async dispatch => {
+  const response = await api.get(`/api/book/calculate/${userId}`);
+  dispatch({ type: actionTypes.CALCULATE_BOOK_STATUS, payload: response.data });
+};
+
 // memo
 
 export const showMemos = (userId, bookId) => async dispatch => {

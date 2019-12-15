@@ -4,11 +4,18 @@ import { Link } from "react-router-dom";
 import defaultImage from "../../assets/user.svg";
 import classes from "./sidemenu.css";
 import { menus } from "../../../utils/variables";
-import { Grid } from "semantic-ui-react";
+import { Grid, Image } from "semantic-ui-react";
 import { signout, setCurrentUser } from "../../../actions";
+import ImageModal from "../../mypage/content/table/sub-components/ImageModal";
 import history from "../../../history";
 
 class SideMenu extends Component {
+  state = {
+    modal: false
+  };
+  openModal = () => this.setState({ modal: true });
+  closeModal = () => this.setState({ modal: false });
+
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
     this.props.setCurrentUser(local.user._id);
@@ -17,7 +24,26 @@ class SideMenu extends Component {
     return (
       <>
         <div className="User" style={classes.User}>
-          <img src={defaultImage} alt={this.props.user.name} />
+          <img
+            style={{ width: "60px", height: "60px", borderRadius: "50%" }}
+            src={
+              this.props.user.avatar
+                ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/avatar/" +
+                  this.props.user.avatar
+                : defaultImage
+            }
+            alt={this.props.user.name}
+            onClick={this.openModal}
+          />
+
+          <ImageModal
+            icon={"calendar alternate outline"}
+            closeModal={this.closeModal}
+            color={"teal"}
+            userId={this.props.user._id}
+            modal={this.state.modal}
+            header="Upload Avatar"
+          />
         </div>
         <h2
           style={{

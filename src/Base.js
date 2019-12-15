@@ -9,7 +9,7 @@ import Home from "./components/home/Home";
 import CreateBook from "./components/mypage/content/book/CreateBook";
 import BookTable from "./components/mypage/content/table/BookTable";
 import BookInfo from "./components/mypage/content/book/BookInfo";
-import GraphList from "./components/mypage/content/user/GraphList";
+import UserPage from "./components/mypage/content/user/UserPage";
 import SearchBook from "./components/mypage/content/book/SearchBook";
 import Timeline from "./components/mypage/content/table/Timeline";
 
@@ -20,7 +20,7 @@ const Base = () => {
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/signup" exact component={Signup} />
-        <PrivateRoute path="/user" exact component={GraphList} />
+        <PrivateRoute path="/user" exact component={UserPage} />
         <PrivateRoute path="/book" exact component={CreateBook} />
         <PrivateRoute path="/book/search" exact component={SearchBook} />
         <PrivateRoute path="/books" exact component={BookTable} />

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Feed, Grid } from "semantic-ui-react";
+import { Feed, Grid, Image } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 import { getTimeline } from "../../../../actions";
 import { connect } from "react-redux";
@@ -14,18 +14,42 @@ class Timeline extends Component {
   renderTimeline = () => {
     if (!this.props.books) return <Spinner />;
     return this.props.books.map((data, i) => {
+      console.log(data);
       return (
         <Feed key={i} style={{ borderBottom: "solid #000 0.5px" }}>
           <Feed.Event>
-            <Feed.Label
-              image={data.userId.avatar ? data.userId.avatar : defaultImage}
-            />
+            <Feed.Label>
+              <img
+                src={
+                  data.userId.avatar
+                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/avatar/" +
+                      data.userId.avatar
+                    : defaultImage
+                }
+              />
+            </Feed.Label>
             <Feed.Content>
               <Feed.Summary>
                 <a>{data.userId.name}</a> added "{data.name}"
               </Feed.Summary>
               <Feed.Extra images>
-                <img src={data.image} />
+                <img
+                  src={
+                    data.image
+                      ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                        data.image
+                      : ""
+                  }
+                />
+                {/* <Image
+                src={
+                  data.image
+                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                      data.image
+                    : defaultBookImage
+                }
+                size="tiny"
+              /> */}
               </Feed.Extra>
               <Feed.Date>{data.createdAt}</Feed.Date>
             </Feed.Content>

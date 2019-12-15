@@ -6,6 +6,7 @@ import { deleteBook } from "../../../../actions";
 import history from "../../../../history";
 import Spinner from "../../../../spinner/Spinner";
 import defaultImage from "../../../assets/book.png";
+import ImageModal from "../table/sub-components/ImageModal";
 
 // const handleDelete = async (userId, bookId) => {
 //   await this.props.deleteBook(userId, bookId);
@@ -14,8 +15,11 @@ import defaultImage from "../../../assets/book.png";
 class BookDetail extends Component {
   state = {
     loading: false,
-    open: false
+    open: false,
+    modal: false
   };
+  openModal = () => this.setState({ modal: true });
+  closeModal = () => this.setState({ modal: false });
 
   open = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
@@ -35,6 +39,7 @@ class BookDetail extends Component {
 
   renderBookInfo = book => {
     // if (!book) return <Spinner />;
+    console.log(book._id);
     return (
       <>
         <Image
@@ -130,14 +135,23 @@ class BookDetail extends Component {
               <Table.Cell></Table.Cell>
               <Table.Cell>
                 <Button
-                  size="mini"
+                  icon="file image"
                   inverted
-                  color="red"
-                  // onClick={event =>
-                  //   this.handleDelete(event, book.userId, book._id)
-                  // }
-                  onClick={this.open}
+                  color="green"
+                  size="mini"
+                  onClick={this.openModal}
                 >
+                  Image
+                </Button>
+                <ImageModal
+                  icon={"calendar alternate outline"}
+                  closeModal={this.closeModal}
+                  color={"teal"}
+                  bookId={book._id}
+                  userId={book.userId}
+                  modal={this.state.modal}
+                />
+                <Button size="mini" inverted color="red" onClick={this.open}>
                   Delete
                 </Button>
                 <Confirm

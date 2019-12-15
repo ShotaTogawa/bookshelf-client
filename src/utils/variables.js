@@ -22,8 +22,7 @@ export const tableHeaderBefore = [
   "Author",
   "Pages",
   "Registered Date",
-  "Start Date",
-  "Image upload"
+  "Start Date"
 ];
 
 export const tableHeaderReading = [
@@ -43,8 +42,7 @@ export const tableHeaderRead = [
   "Genre",
   "Author",
   "Finish Date",
-  "Evaluation",
-  "Image upload"
+  "Evaluation"
 ];
 
 export const menus = [

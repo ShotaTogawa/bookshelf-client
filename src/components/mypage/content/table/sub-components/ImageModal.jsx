@@ -3,12 +3,14 @@ import { Modal, Button, Icon } from "semantic-ui-react";
 import { api } from "../../../../../api";
 import setAuthToken from "../../../../../utils/setAuthToken";
 import history from "../../../../../history";
+import Spinner from "../../../../../spinner/Spinner";
 
 class ImageModal extends Component {
   state = {
     file: null,
     modal: false,
-    imageUrl: ""
+    imageUrl: "",
+    loading: false
   };
 
   onFileChange = event => {
@@ -26,6 +28,7 @@ class ImageModal extends Component {
 
   uploadFile = async () => {
     const { userId, bookId } = this.props;
+    this.setState({ loading: true });
 
     if (bookId) {
       const uploadConfig = await api.get(`/api/upload/${userId}/${bookId}`);
@@ -36,9 +39,11 @@ class ImageModal extends Component {
         await api.put(`/api/upload/${userId}/${bookId}`, {
           imageUrl: uploadConfig.data.key
         });
-        this.props.closeModal();
+        this.setState({ loading: false });
+        // this.props.closeModal();
         history.push(`/book/${bookId}`);
       } catch (e) {
+        this.setState({ loading: false });
         console.log(e);
       }
     } else {
@@ -63,7 +68,9 @@ class ImageModal extends Component {
   render() {
     const { modal, closeModal, header } = this.props;
     console.log(this.props);
-    return (
+    return this.state.loading ? (
+      <Spinner />
+    ) : (
       <Modal basic open={modal} onClose={closeModal}>
         <Modal.Header>{header ? header : "Select an Image File"}</Modal.Header>
         <Modal.Content>

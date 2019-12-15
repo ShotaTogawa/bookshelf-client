@@ -7,17 +7,9 @@ import { Table, Image, Button } from "semantic-ui-react";
 import DateForm from "./sub-components/DateForm";
 import UpdateReadPages from "./sub-components/UpdateReadPages";
 import UpdateEvaluation from "./sub-components/UpdateEvaluation";
-import ImageModal from "./sub-components/ImageModal";
 import defaultImage from "../../../assets/book.png";
 
 class Reading extends Component {
-  state = {
-    modal: false
-  };
-  openModal = () => this.setState({ modal: true });
-
-  closeModal = () => this.setState({ modal: false });
-
   renderTableData = books => {
     if (!books) {
       return <Spinner />;
@@ -61,21 +53,6 @@ class Reading extends Component {
               />
               <UpdateReadPages userId={data.userId} bookId={data._id} />
               <UpdateEvaluation userId={data.userId} bookId={data._id} />
-              <Button
-                circular
-                icon="file image"
-                color={"orange"}
-                size={"mini"}
-                onClick={this.openModal}
-              />
-              <ImageModal
-                icon={"calendar alternate outline"}
-                closeModal={this.closeModal}
-                color={"teal"}
-                bookId={data._id}
-                userId={data.userId}
-                modal={this.state.modal}
-              />
             </Table.Cell>
           </Table.Row>
         </Table.Body>

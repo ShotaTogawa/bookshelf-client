@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { fetchBook } from "../../../../actions";
 import BookDetail from "./BookDetail";
 import Memo from "../memo/Memo";
-import CreateMemo from "../memo/CreateMemo";
 import SideMenu from "../../sidemenu/SideMenu";
 import Spinner from "../../../../spinner/Spinner";
 
@@ -15,18 +14,10 @@ class BookInfo extends Component {
     this.props.fetchBook(local.user._id, bookId);
   }
   renderBook = () => {
-    // return this.props.book.map(book => {
     const { book } = this.props;
     if (!book || book.length === 0) return <Spinner />;
-    // const book = this.props.book[1];
     return (
       <>
-        {/* <Grid.Column width={5}>
-            <BookDetail book={book} />
-          </Grid.Column>
-          <Grid.Column width={7}>
-            <Memo bookId={book._id} userId={book.userId} />
-          </Grid.Column> */}
         <Grid.Column width={5}>
           <BookDetail book={book} />
         </Grid.Column>
@@ -35,7 +26,6 @@ class BookInfo extends Component {
         </Grid.Column>
       </>
     );
-    // });
   };
 
   render() {

@@ -1,54 +1,85 @@
-import React from "react";
+import React, { Component } from "react";
 import StarRating from "../../../common/StarRating";
 import Spinner from "../../../../spinner/Spinner";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Table, Image } from "semantic-ui-react";
+import { Table, Image, Button } from "semantic-ui-react";
+import ImageModal from "./sub-components/ImageModal";
+import defaultImage from "../../../assets/book.png";
 
-const renderTableData = books => {
-  // const local = JSON.parse(localStorage.getItem("user"));
-  if (!books) {
-    return <Spinner />;
-  }
-  return books.map(data => {
-    return (
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell>
-            <Link to={`/book/${data._id}`}>
-              <Image
-                src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
-                size="tiny"
+class Read extends Component {
+  state = {
+    modal: false
+  };
+  openModal = () => this.setState({ modal: true });
+
+  closeModal = () => this.setState({ modal: false });
+
+  renderTableData = books => {
+    if (!books) {
+      return <Spinner />;
+    }
+    return books.map(data => {
+      return (
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <Link to={`/book/${data._id}`}>
+                <Image
+                  src={
+                    data.image
+                      ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                        data.image
+                      : defaultImage
+                  }
+                  size="tiny"
+                />
+              </Link>
+            </Table.Cell>
+            <Table.Cell>
+              <Link to={`/book/${data._id}`}>{data.name}</Link>
+            </Table.Cell>
+            <Table.Cell>{data.genre}</Table.Cell>
+            <Table.Cell>{data.author}</Table.Cell>
+            <Table.Cell>{moment(data.endDate).format("MMM D YYYY")}</Table.Cell>
+            <Table.Cell>
+              <StarRating
+                evaluation={data.evaluation}
+                userId={data.userId}
+                bookId={data._id}
               />
-            </Link>
-          </Table.Cell>
-          <Table.Cell>
-            <Link to={`/book/${data._id}`}>{data.name}</Link>
-          </Table.Cell>
-          <Table.Cell>{data.genre}</Table.Cell>
-          <Table.Cell>{data.author}</Table.Cell>
-          <Table.Cell>{moment(data.endDate).format("MMM D YYYY")}</Table.Cell>
-          <Table.Cell>
-            <StarRating
-              evaluation={data.evaluation}
-              userId={data.userId}
-              bookId={data._id}
-            />
-          </Table.Cell>
-          <Table.Cell>TODO: make function to upload image</Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    );
-  });
-};
+            </Table.Cell>
+            <Table.Cell>
+              <Button
+                circular
+                icon="file image"
+                color={"orange"}
+                size={"mini"}
+                onClick={this.openModal}
+              />
+              <ImageModal
+                icon={"calendar alternate outline"}
+                closeModal={this.closeModal}
+                color={"teal"}
+                bookId={data._id}
+                userId={data.userId}
+                modal={this.state.modal}
+              />
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      );
+    });
+  };
 
-const Read = ({ books, loadButton }) => {
-  return (
-    <>
-      {renderTableData(books)}
-      {loadButton()}
-    </>
-  );
-};
+  render() {
+    return (
+      <>
+        {this.renderTableData(this.props.books)}
+        {this.props.loadButton()}
+      </>
+    );
+  }
+}
 
 export default Read;

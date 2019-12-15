@@ -13,8 +13,6 @@ class Memo extends Component {
   };
 
   componentDidMount() {
-    // const bookId = this.props.bookId;
-    // const userId = this.props.userId;
     const bookId = history.location.pathname.slice(6);
     const local = JSON.parse(localStorage.getItem("user"));
     this.props.showMemos(local.user._id, bookId);

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button, Icon } from "semantic-ui-react";
 import { api } from "../../../../../api";
-import { connect } from "react-redux";
 import setAuthToken from "../../../../../utils/setAuthToken";
 import history from "../../../../../history";
 
@@ -39,7 +38,8 @@ class ImageModal extends Component {
         await api.put(`/api/upload/${userId}/${bookId}`, {
           imageUrl: uploadConfig.data.key
         });
-        history.push("/books");
+        this.props.closeModal();
+        history.push(`/book/${bookId}`);
       } catch (e) {
         console.log(e);
       }
@@ -52,6 +52,7 @@ class ImageModal extends Component {
         await api.put(`/api/upload/${userId}`, {
           avatar: uploadConfig.data.key
         });
+        this.props.closeModal();
         history.push("/user");
       } catch (e) {
         console.log(e);
@@ -82,4 +83,4 @@ class ImageModal extends Component {
   }
 }
 
-export default connect(null, {})(ImageModal);
+export default ImageModal;

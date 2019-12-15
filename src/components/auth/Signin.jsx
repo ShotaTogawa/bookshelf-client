@@ -7,8 +7,6 @@ import Spinner from "../../spinner/Spinner";
 import { isAuthenticated } from "./";
 import history from "../../history";
 
-const { user } = isAuthenticated();
-
 class Signin extends Component {
   state = {
     email: "",

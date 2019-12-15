@@ -4,7 +4,7 @@ import SideMenu from "../../sidemenu/SideMenu";
 import { getTimeline } from "../../../../actions";
 import { connect } from "react-redux";
 import Spinner from "../../../../spinner/Spinner";
-import defaultImage from "../../../assets/user.svg";
+import defaultImage from "../../../assets/user.png";
 
 class Timeline extends Component {
   componentDidMount() {
@@ -15,11 +15,10 @@ class Timeline extends Component {
     if (!this.props.books) return <Spinner />;
     return this.props.books.map((data, i) => {
       return (
-        <Feed key={i} style={{ borderBottom: "solid #000 2px" }}>
+        <Feed key={i} style={{ borderBottom: "solid #000 0.5px" }}>
           <Feed.Event>
             <Feed.Label
               image={data.userId.avatar ? data.userId.avatar : defaultImage}
-              style={{ backgroundColor: "black" }}
             />
             <Feed.Content>
               <Feed.Summary>

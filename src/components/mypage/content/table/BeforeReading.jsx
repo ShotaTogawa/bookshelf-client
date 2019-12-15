@@ -5,6 +5,7 @@ import moment from "moment";
 import { Table, Image, Button } from "semantic-ui-react";
 import ImageModal from "./sub-components/ImageModal";
 import DateForm from "./sub-components/DateForm";
+import defaultImage from "../../../assets/book.png";
 
 class BeforeReading extends Component {
   state = {
@@ -19,13 +20,19 @@ class BeforeReading extends Component {
       return <Spinner />;
     }
     return books.map(data => {
+      console.log(data.image);
       return (
         <Table.Body>
           <Table.Row>
             <Table.Cell>
               <Link to={`/book/${data._id}`}>
                 <Image
-                  src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
+                  src={
+                    data.image
+                      ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                        data.image
+                      : defaultImage
+                  }
                   size="tiny"
                 />
               </Link>
@@ -58,7 +65,8 @@ class BeforeReading extends Component {
                 icon={"calendar alternate outline"}
                 closeModal={this.closeModal}
                 color={"teal"}
-                book={data._id}
+                bookId={data._id}
+                userId={data.userId}
                 modal={this.state.modal}
               />
             </Table.Cell>

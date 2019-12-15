@@ -3,7 +3,7 @@ import Spinner from "../../../../spinner/Spinner";
 import StarRating from "../../../common/StarRating";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Table, Image, Button } from "semantic-ui-react";
+import { Table, Image } from "semantic-ui-react";
 import DateForm from "./sub-components/DateForm";
 import UpdateReadPages from "./sub-components/UpdateReadPages";
 import UpdateEvaluation from "./sub-components/UpdateEvaluation";
@@ -15,6 +15,7 @@ class Reading extends Component {
       return <Spinner />;
     }
     return books.map(data => {
+      console.log(data);
       return (
         <Table.Body>
           <Table.Row>

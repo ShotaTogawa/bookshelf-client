@@ -3,8 +3,7 @@ import StarRating from "../../../common/StarRating";
 import Spinner from "../../../../spinner/Spinner";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Table, Image, Button } from "semantic-ui-react";
-import ImageModal from "./sub-components/ImageModal";
+import { Table, Image } from "semantic-ui-react";
 import defaultImage from "../../../assets/book.png";
 
 class Read extends Component {

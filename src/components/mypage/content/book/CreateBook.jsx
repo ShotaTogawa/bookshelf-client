@@ -118,6 +118,7 @@ class CreateBook extends Component {
               name="page_nums"
               placeholder="Enter the number of pages of the book"
               onChange={this.handleChange}
+              min="1"
             />
           </Form.Field>
           <Form.Field>
@@ -127,6 +128,7 @@ class CreateBook extends Component {
               name="price"
               placeholder="Enter purchased price"
               onChange={this.handleChange}
+              min="0"
             />
           </Form.Field>
           <Form.Field

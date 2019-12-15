@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../../../../spinner/Spinner";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { Table, Image, Button } from "semantic-ui-react";
+import { Table, Image } from "semantic-ui-react";
 import DateForm from "./sub-components/DateForm";
 import defaultImage from "../../../assets/book.png";
 

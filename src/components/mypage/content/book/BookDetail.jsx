@@ -7,10 +7,7 @@ import history from "../../../../history";
 import Spinner from "../../../../spinner/Spinner";
 import defaultImage from "../../../assets/book.png";
 import ImageModal from "../table/sub-components/ImageModal";
-
-// const handleDelete = async (userId, bookId) => {
-//   await this.props.deleteBook(userId, bookId);
-// };
+import { Link } from "react-router-dom";
 
 class BookDetail extends Component {
   state = {
@@ -132,7 +129,9 @@ class BookDetail extends Component {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell></Table.Cell>
+              <Table.Cell>
+                <Link to="/books">Back</Link>
+              </Table.Cell>
               <Table.Cell>
                 <Button
                   icon="file image"

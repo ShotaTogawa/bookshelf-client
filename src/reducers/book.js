@@ -15,12 +15,14 @@ const book_reducer = (state = {}, action) => {
     case actionTypes.GET_TIMELINE:
       return { ...state, books: action.payload };
     case actionTypes.UPDATE_EVALUATION:
+      console.log(action.payload);
       return { ...state, [action.payload._id]: action.payload };
     case actionTypes.UPDATE_START_DATE:
       return { ...state, [action.payload._id]: action.payload };
     case actionTypes.UPDATE_END_DATE:
       return { ...state, [action.payload._id]: action.payload };
     case actionTypes.UPDATE_READ_PAGES:
+      console.log(action.payload);
       return { ...state, [action.payload._id]: action.payload };
     default:
       return state;

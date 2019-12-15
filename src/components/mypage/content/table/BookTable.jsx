@@ -11,9 +11,10 @@ import {
   tableHeaderRead
 } from "../../../../utils/variables";
 import { Table, Menu, Grid, Icon, Button } from "semantic-ui-react";
+import Spinner from "../../../../spinner/Spinner";
 
 class BookTable extends Component {
-  state = { activeItem: "beforeReading", skip: 0 };
+  state = { activeItem: "beforeReading", skip: 0, loading: false };
 
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
@@ -22,12 +23,14 @@ class BookTable extends Component {
 
   handleItemClick = async (e, { name }) => {
     const local = JSON.parse(localStorage.getItem("user"));
+    this.setState({ loading: true });
     await this.setState({ activeItem: name });
     await this.props.fetchBooks(
       local.user._id,
       this.state.activeItem,
       this.state.skip
     );
+    this.setState({ loading: false });
   };
 
   renderTableHeader = () => {
@@ -72,7 +75,9 @@ class BookTable extends Component {
   };
 
   render() {
-    return (
+    return this.state.loading ? (
+      <Spinner />
+    ) : (
       <Grid>
         <SideMenu />
         <Grid.Column width={12} style={{ marginTop: "30px" }}>

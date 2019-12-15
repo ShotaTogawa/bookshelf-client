@@ -18,7 +18,11 @@ class UpdateEvaluation extends Component {
     const evaluation = this.state.evaluation;
 
     await this.props.updateEvaluation(userId, bookId, { evaluation });
-    history.push("/books");
+    try {
+      history.push("/books");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   render() {

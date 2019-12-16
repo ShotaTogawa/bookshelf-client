@@ -40,8 +40,8 @@ class ImageModal extends Component {
           imageUrl: uploadConfig.data.key
         });
         this.setState({ loading: false });
-        // this.props.closeModal();
-        history.push(`/book/${bookId}`);
+        this.props.closeModal();
+        history.push(`/books`);
       } catch (e) {
         this.setState({ loading: false });
         console.log(e);
@@ -67,7 +67,6 @@ class ImageModal extends Component {
 
   render() {
     const { modal, closeModal, header } = this.props;
-    console.log(this.props);
     return this.state.loading ? (
       <Spinner />
     ) : (

@@ -41,9 +41,7 @@ export const fetchBooks = (
   status = "beforeReading",
   skip = 0
 ) => async dispatch => {
-  const response = await api.get(
-    `/api/books/${userId}?status=${status}&skip=${skip}`
-  );
+  const response = await api.get(`/api/books/${userId}?status=${status}`);
   dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
 };
 

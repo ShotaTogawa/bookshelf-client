@@ -71,11 +71,8 @@ class SideMenu extends Component {
     return menus.map(menu => {
       return (
         <li key={menu.title}>
-          <a href="#">
-            <i className={menu.icon}></i>
-            &ensp;{menu.title}
-          </a>
-
+          <i className={menu.icon}></i>
+          &ensp;{menu.title}
           {menu.submenus.length > 0
             ? menu.submenus.map(submenu => (
                 <ul key={submenu.title}>
@@ -107,7 +104,7 @@ class SideMenu extends Component {
                 style={{ cursor: "pointer" }}
                 key="logout"
               >
-                &thinsp;&thinsp;<i className="fas fa-sign-out-alt"></i>
+                <i className="fas fa-sign-out-alt"></i>
                 &thinsp;&thinsp;Signout
               </li>
             </ul>

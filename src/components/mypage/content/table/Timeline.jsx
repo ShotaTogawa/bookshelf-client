@@ -31,7 +31,8 @@ class Timeline extends Component {
             </Feed.Label>
             <Feed.Content>
               <Feed.Summary>
-                <a>{data.userId.name}</a> added "{data.name}"
+                <span style={{ color: "#3EA4E3" }}>{data.userId.name}</span>{" "}
+                added "{data.name}"
               </Feed.Summary>
               <Feed.Extra images>
                 <img
@@ -41,6 +42,7 @@ class Timeline extends Component {
                         data.image
                       : ""
                   }
+                  alt={data.name}
                 />
               </Feed.Extra>
               <Feed.Date>{data.createdAt}</Feed.Date>

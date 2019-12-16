@@ -10,7 +10,7 @@ import {
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table, Menu, Grid, Icon, Button } from "semantic-ui-react";
+import { Table, Menu, Grid } from "semantic-ui-react";
 import Spinner from "../../../../spinner/Spinner";
 
 class BookTable extends Component {
@@ -49,29 +49,20 @@ class BookTable extends Component {
     }
   };
 
-  loadButton = () => {
-    return (
-      <>
-        <Button.Group>
-          <Button icon>
-            <Icon
-              className="fas fa-arrow-left"
-              onClick={() =>
-                this.state.skip <= 0
-                  ? 0
-                  : this.setState({ skip: this.state.skip - 5 })
-              }
-            />
-          </Button>
-          <Button icon>
-            <Icon
-              className="fas fa-arrow-right"
-              onClick={() => this.setState({ skip: this.state.skip + 5 })}
-            />
-          </Button>
-        </Button.Group>
-      </>
+  handleClick = async num => {
+    const local = JSON.parse(localStorage.getItem("user"));
+    const { skip } = this.state;
+    if (skip < 0) {
+      this.setState({ skip: 0 });
+    } else {
+      this.setState({ loading: true, skip: skip + num });
+    }
+    await this.props.fetchBooks(
+      local.user._id,
+      this.state.activeItem,
+      this.state.skip
     );
+    this.setState({ loading: false });
   };
 
   render() {
@@ -103,14 +94,11 @@ class BookTable extends Component {
               <Table.Row>{this.renderTableHeader()}</Table.Row>
             </Table.Header>
             {this.state.activeItem === "reading" ? (
-              <Reading books={this.props.books} loadButton={this.loadButton} />
+              <Reading books={this.props.books} />
             ) : this.state.activeItem === "read" ? (
-              <Read books={this.props.books} loadButton={this.loadButton} />
+              <Read books={this.props.books} />
             ) : (
-              <BeforeReading
-                books={this.props.books}
-                loadButton={this.loadButton}
-              />
+              <BeforeReading books={this.props.books} />
             )}
           </Table>
         </Grid.Column>

@@ -17,57 +17,48 @@ class Reading extends Component {
     return books.map(data => {
       console.log(data);
       return (
-        <Table.Body>
-          <Table.Row>
-            <Table.Cell>
-              <Link to={`/book/${data._id}`}>
-                <Image
-                  src={
-                    data.image
-                      ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
-                        data.image
-                      : defaultImage
-                  }
-                  size="tiny"
-                />
-              </Link>
-            </Table.Cell>
-            <Table.Cell>
-              <Link to={`/book/${data._id}`}>{data.name}</Link>
-            </Table.Cell>
-            <Table.Cell>{data.genre}</Table.Cell>
-            <Table.Cell>{data.author}</Table.Cell>
-            <Table.Cell>
-              {Math.round((data.read_pages / data.page_nums) * 100) + "%"}
-            </Table.Cell>
-            <Table.Cell>
-              {moment(data.startDate).format("MMM D YYYY")}
-            </Table.Cell>
-            <Table.Cell>
-              <StarRating evaluation={data.evaluation} />
-            </Table.Cell>
-            <Table.Cell>
-              <DateForm
-                userId={data.userId}
-                bookId={data._id}
-                status={data.status}
+        <Table.Row key={data._id}>
+          <Table.Cell>
+            <Link to={`/book/${data._id}`}>
+              <Image
+                src={
+                  data.image
+                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                      data.image
+                    : defaultImage
+                }
+                size="tiny"
               />
-              <UpdateReadPages userId={data.userId} bookId={data._id} />
-              <UpdateEvaluation userId={data.userId} bookId={data._id} />
-            </Table.Cell>
-          </Table.Row>
-        </Table.Body>
+            </Link>
+          </Table.Cell>
+          <Table.Cell>
+            <Link to={`/book/${data._id}`}>{data.name}</Link>
+          </Table.Cell>
+          <Table.Cell>{data.genre}</Table.Cell>
+          <Table.Cell>{data.author}</Table.Cell>
+          <Table.Cell>
+            {Math.round((data.read_pages / data.page_nums) * 100) + "%"}
+          </Table.Cell>
+          <Table.Cell>{moment(data.startDate).format("MMM D YYYY")}</Table.Cell>
+          <Table.Cell>
+            <StarRating evaluation={data.evaluation} />
+          </Table.Cell>
+          <Table.Cell>
+            <DateForm
+              userId={data.userId}
+              bookId={data._id}
+              status={data.status}
+            />
+            <UpdateReadPages userId={data.userId} bookId={data._id} />
+            <UpdateEvaluation userId={data.userId} bookId={data._id} />
+          </Table.Cell>
+        </Table.Row>
       );
     });
   };
 
   render() {
-    return (
-      <>
-        {this.renderTableData(this.props.books)}
-        {this.props.loadButton()}
-      </>
-    );
+    return <Table.Body>{this.renderTableData(this.props.books)}</Table.Body>;
   }
 }
 

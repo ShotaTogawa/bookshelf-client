@@ -136,14 +136,6 @@ class CreateBook extends Component {
             label={<label>Do you want to introduce this book in public?</label>}
             onClick={e => this.setState({ publish: !this.state.publish })}
           />
-          <Form.Field>
-            <label>Image upload</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={this.handleChangeFile}
-            />
-          </Form.Field>
           <button className="ui button" type="submit">
             Submit
           </button>

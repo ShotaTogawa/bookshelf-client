@@ -1,23 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
 import StarRating from "../../../common/StarRating";
 import Spinner from "../../../../spinner/Spinner";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { Table, Image } from "semantic-ui-react";
+import defaultImage from "../../../assets/book.png";
 
-const renderTableData = books => {
-  // const local = JSON.parse(localStorage.getItem("user"));
-  if (!books) {
-    return <Spinner />;
-  }
-  return books.map(data => {
-    return (
-      <Table.Body>
-        <Table.Row>
+class Read extends Component {
+  renderTableData = books => {
+    if (!books) {
+      return <Spinner />;
+    }
+    return books.map(data => {
+      return (
+        <Table.Row key={data._id}>
           <Table.Cell>
             <Link to={`/book/${data._id}`}>
               <Image
-                src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
+                src={
+                  data.image
+                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                      data.image
+                    : defaultImage
+                }
                 size="tiny"
               />
             </Link>
@@ -35,20 +40,14 @@ const renderTableData = books => {
               bookId={data._id}
             />
           </Table.Cell>
-          <Table.Cell>TODO: make function to upload image</Table.Cell>
         </Table.Row>
-      </Table.Body>
-    );
-  });
-};
+      );
+    });
+  };
 
-const Read = ({ books, loadButton }) => {
-  return (
-    <>
-      {renderTableData(books)}
-      {loadButton()}
-    </>
-  );
-};
+  render() {
+    return <Table.Body>{this.renderTableData(this.props.books)}</Table.Body>;
+  }
+}
 
 export default Read;

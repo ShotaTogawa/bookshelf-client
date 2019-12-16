@@ -10,10 +10,11 @@ import {
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table, Menu, Grid, Icon, Button } from "semantic-ui-react";
+import { Table, Menu, Grid } from "semantic-ui-react";
+import Spinner from "../../../../spinner/Spinner";
 
 class BookTable extends Component {
-  state = { activeItem: "beforeReading", skip: 0 };
+  state = { activeItem: "beforeReading", skip: 0, loading: false };
 
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
@@ -22,58 +23,52 @@ class BookTable extends Component {
 
   handleItemClick = async (e, { name }) => {
     const local = JSON.parse(localStorage.getItem("user"));
+    this.setState({ loading: true });
     await this.setState({ activeItem: name });
     await this.props.fetchBooks(
       local.user._id,
       this.state.activeItem,
       this.state.skip
     );
+    this.setState({ loading: false });
   };
 
   renderTableHeader = () => {
     if (this.state.activeItem === "reading") {
       return tableHeaderReading.map(header => {
-        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+        return <Table.HeaderCell key={header}>{header}</Table.HeaderCell>;
       });
     } else if (this.state.activeItem === "beforeReading") {
       return tableHeaderBefore.map(header => {
-        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+        return <Table.HeaderCell key={header}>{header}</Table.HeaderCell>;
       });
     } else {
       return tableHeaderRead.map(header => {
-        return <Table.HeaderCell>{header}</Table.HeaderCell>;
+        return <Table.HeaderCell key={header}>{header}</Table.HeaderCell>;
       });
     }
   };
 
-  loadButton = () => {
-    return (
-      <div>
-        <Button.Group>
-          <Button icon>
-            <Icon
-              className="fas fa-arrow-left"
-              onClick={() =>
-                this.state.skip <= 0
-                  ? 0
-                  : this.setState({ skip: this.state.skip - 5 })
-              }
-            />
-          </Button>
-          <Button icon>
-            <Icon
-              className="fas fa-arrow-right"
-              onClick={() => this.setState({ skip: this.state.skip + 5 })}
-            />
-          </Button>
-        </Button.Group>
-      </div>
+  handleClick = async num => {
+    const local = JSON.parse(localStorage.getItem("user"));
+    const { skip } = this.state;
+    if (skip < 0) {
+      this.setState({ skip: 0 });
+    } else {
+      this.setState({ loading: true, skip: skip + num });
+    }
+    await this.props.fetchBooks(
+      local.user._id,
+      this.state.activeItem,
+      this.state.skip
     );
+    this.setState({ loading: false });
   };
 
   render() {
-    console.log(this.state);
-    return (
+    return this.state.loading ? (
+      <Spinner />
+    ) : (
       <Grid>
         <SideMenu />
         <Grid.Column width={12} style={{ marginTop: "30px" }}>
@@ -99,14 +94,11 @@ class BookTable extends Component {
               <Table.Row>{this.renderTableHeader()}</Table.Row>
             </Table.Header>
             {this.state.activeItem === "reading" ? (
-              <Reading books={this.props.books} loadButton={this.loadButton} />
+              <Reading books={this.props.books} />
             ) : this.state.activeItem === "read" ? (
-              <Read books={this.props.books} loadButton={this.loadButton} />
+              <Read books={this.props.books} />
             ) : (
-              <BeforeReading
-                books={this.props.books}
-                loadButton={this.loadButton}
-              />
+              <BeforeReading books={this.props.books} />
             )}
           </Table>
         </Grid.Column>
@@ -116,8 +108,6 @@ class BookTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("hello", Object.values(state.book)[0]);
-  console.log(state.book.books);
   return {
     books: state.book.books,
     currentUser: state.user.user

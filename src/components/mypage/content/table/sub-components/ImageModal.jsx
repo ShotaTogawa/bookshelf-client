@@ -1,62 +1,82 @@
 import React, { Component } from "react";
-// import mime from "mime-types";
-import { Modal, Input, Button, Icon } from "semantic-ui-react";
-// import uuidv4 from "uuidv4";
-// import { uploadFile } from "../../../../../actions";
-import { connect } from "react-redux";
+import { Modal, Button, Icon } from "semantic-ui-react";
+import { api } from "../../../../../api";
+import setAuthToken from "../../../../../utils/setAuthToken";
+import history from "../../../../../history";
+import Spinner from "../../../../../spinner/Spinner";
 
 class ImageModal extends Component {
   state = {
     file: null,
-    authorized: ["image/jpeg", "image/png"],
     modal: false,
-    imageUrl: ""
+    imageUrl: "",
+    loading: false
   };
-
-  // addFile = event => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     this.setState({ file });
-  //   }
-  // };
-
-  // sendFile = async () => {
-  //   const { file } = this.state;
-  //   const { closeModal } = this.props;
-  //   if (file !== null) {
-  //     if (this.isAuthorized(file.name)) {
-  //       const metadata = { contentType: mime.lookup(file.name) };
-  //       await this.uploadFile(file, metadata);
-  //       await closeModal();
-  //       await this.clearFile();
-  //     }
-  //   }
-  // };
 
   onFileChange = event => {
     this.setState({ file: event.target.files[0] });
   };
 
+  updateS3Bucket = async uploadConfig => {
+    delete api.defaults.headers.common["Authorization"];
+    await api.put(uploadConfig.data.url, this.state.file, {
+      headers: {
+        "Content-Type": this.state.file.type
+      }
+    });
+  };
+
+  uploadFile = async () => {
+    const { userId, bookId } = this.props;
+    this.setState({ loading: true });
+
+    if (bookId) {
+      const uploadConfig = await api.get(`/api/upload/${userId}/${bookId}`);
+      await this.updateS3Bucket(uploadConfig);
+      try {
+        const user = JSON.parse(localStorage.user);
+        await setAuthToken(user.token);
+        await api.put(`/api/upload/${userId}/${bookId}`, {
+          imageUrl: uploadConfig.data.key
+        });
+        this.setState({ loading: false });
+        this.props.closeModal();
+        history.push(`/books`);
+      } catch (e) {
+        this.setState({ loading: false });
+        console.log(e);
+      }
+    } else {
+      const uploadConfig = await api.get(`/api/upload/${userId}`);
+      await this.updateS3Bucket(uploadConfig);
+      try {
+        const user = JSON.parse(localStorage.user);
+        await setAuthToken(user.token);
+        await api.put(`/api/upload/${userId}`, {
+          avatar: uploadConfig.data.key
+        });
+        this.props.closeModal();
+        history.push("/user");
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   clearFile = () => this.setState({ file: null });
 
   render() {
-    const { modal, closeModal } = this.props;
-    console.log(this.state.file);
-    return (
+    const { modal, closeModal, header } = this.props;
+    return this.state.loading ? (
+      <Spinner />
+    ) : (
       <Modal basic open={modal} onClose={closeModal}>
-        <Modal.Header>Select an Image File</Modal.Header>
+        <Modal.Header>{header ? header : "Select an Image File"}</Modal.Header>
         <Modal.Content>
           <input type="file" accept="image/*" onChange={this.onFileChange} />
-          {/* <Input
-            onChange={this.addFile}
-            fluid
-            label="File types: jpg, png"
-            name="file"
-            type="file"
-          /> */}
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.sendFile} color="green" inverted>
+          <Button onClick={this.uploadFile} color="green" inverted>
             <Icon name="checkmark" /> Send
           </Button>
           <Button color="red" inverted onClick={closeModal}>
@@ -68,4 +88,4 @@ class ImageModal extends Component {
   }
 }
 
-export default connect(null, {})(ImageModal);
+export default ImageModal;

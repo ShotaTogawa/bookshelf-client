@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/type";
-import _ from "lodash";
 
 const book_reducer = (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +21,7 @@ const book_reducer = (state = {}, action) => {
     case actionTypes.UPDATE_END_DATE:
       return { ...state, [action.payload._id]: action.payload };
     case actionTypes.UPDATE_READ_PAGES:
+      console.log(action.payload);
       return { ...state, [action.payload._id]: action.payload };
     default:
       return state;

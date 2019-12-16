@@ -5,7 +5,6 @@ import { createBook } from "../../../../actions";
 import { Form, Grid, Message, Checkbox } from "semantic-ui-react";
 import SideMenu from "../../sidemenu/SideMenu";
 import history from "../../../../history";
-import { Redirect } from "react-router-dom";
 
 class CreateBook extends Component {
   state = {
@@ -119,6 +118,7 @@ class CreateBook extends Component {
               name="page_nums"
               placeholder="Enter the number of pages of the book"
               onChange={this.handleChange}
+              min="1"
             />
           </Form.Field>
           <Form.Field>
@@ -128,6 +128,7 @@ class CreateBook extends Component {
               name="price"
               placeholder="Enter purchased price"
               onChange={this.handleChange}
+              min="0"
             />
           </Form.Field>
           <Form.Field
@@ -135,14 +136,6 @@ class CreateBook extends Component {
             label={<label>Do you want to introduce this book in public?</label>}
             onClick={e => this.setState({ publish: !this.state.publish })}
           />
-          <Form.Field>
-            <label>Image upload</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={this.handleChangeFile}
-            />
-          </Form.Field>
           <button className="ui button" type="submit">
             Submit
           </button>

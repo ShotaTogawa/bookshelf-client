@@ -41,9 +41,7 @@ export const fetchBooks = (
   status = "beforeReading",
   skip = 0
 ) => async dispatch => {
-  const response = await api.get(
-    `/api/books/${userId}?status=${status}&skip=${skip}`
-  );
+  const response = await api.get(`/api/books/${userId}?status=${status}`);
   dispatch({ type: actionTypes.FETCH_BOOKS, payload: response.data });
 };
 
@@ -114,6 +112,11 @@ export const searchBooks = (userId, params) => async dispatch => {
   );
   console.log(response.data);
   dispatch({ type: actionTypes.SEARCH_BOOKS, payload: response.data });
+};
+
+export const calculateStatus = userId => async dispatch => {
+  const response = await api.get(`/api/book/calculate/${userId}`);
+  dispatch({ type: actionTypes.CALCULATE_BOOK_STATUS, payload: response.data });
 };
 
 // memo

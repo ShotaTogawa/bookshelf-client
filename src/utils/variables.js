@@ -22,8 +22,7 @@ export const tableHeaderBefore = [
   "Author",
   "Pages",
   "Registered Date",
-  "Start Date",
-  "Image upload"
+  "Start Date"
 ];
 
 export const tableHeaderReading = [
@@ -43,8 +42,7 @@ export const tableHeaderRead = [
   "Genre",
   "Author",
   "Finish Date",
-  "Evaluation",
-  "Image upload"
+  "Evaluation"
 ];
 
 export const menus = [
@@ -53,8 +51,8 @@ export const menus = [
     icon: "fas fa-user-circle",
     title: "User",
     submenus: [
-      { url: "/user", title: "Status", icon: "fas fa-list" },
-      { url: "#", title: "Edit", icon: "fas fa-user-edit" }
+      { url: "/user", title: "Status", icon: "fas fa-list" }
+      // { url: "#", title: "Edit", icon: "fas fa-user-edit" }
     ]
   },
   {

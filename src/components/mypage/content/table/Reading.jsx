@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Spinner from "../../../../spinner/Spinner";
 import StarRating from "../../../common/StarRating";
 import moment from "moment";
@@ -7,19 +7,26 @@ import { Table, Image } from "semantic-ui-react";
 import DateForm from "./sub-components/DateForm";
 import UpdateReadPages from "./sub-components/UpdateReadPages";
 import UpdateEvaluation from "./sub-components/UpdateEvaluation";
+import defaultImage from "../../../assets/book.png";
 
-const renderTableData = books => {
-  if (!books) {
-    return <Spinner />;
-  }
-  return books.map(data => {
-    return (
-      <Table.Body>
-        <Table.Row>
+class Reading extends Component {
+  renderTableData = books => {
+    if (!books) {
+      return <Spinner />;
+    }
+    return books.map(data => {
+      console.log(data);
+      return (
+        <Table.Row key={data._id}>
           <Table.Cell>
             <Link to={`/book/${data._id}`}>
               <Image
-                src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg"
+                src={
+                  data.image
+                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                      data.image
+                    : defaultImage
+                }
                 size="tiny"
               />
             </Link>
@@ -44,20 +51,15 @@ const renderTableData = books => {
             />
             <UpdateReadPages userId={data.userId} bookId={data._id} />
             <UpdateEvaluation userId={data.userId} bookId={data._id} />
-            TODO: Make status change func
           </Table.Cell>
         </Table.Row>
-      </Table.Body>
-    );
-  });
-};
+      );
+    });
+  };
 
-const Reading = ({ books, loadButton }) => {
-  return (
-    <>
-      {renderTableData(books)}
-      {loadButton()}
-    </>
-  );
-};
+  render() {
+    return <Table.Body>{this.renderTableData(this.props.books)}</Table.Body>;
+  }
+}
+
 export default Reading;

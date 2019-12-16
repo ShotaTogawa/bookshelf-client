@@ -4,7 +4,7 @@ import SideMenu from "../../sidemenu/SideMenu";
 import { getTimeline } from "../../../../actions";
 import { connect } from "react-redux";
 import Spinner from "../../../../spinner/Spinner";
-import defaultImage from "../../../assets/user.svg";
+import defaultImage from "../../../assets/user.png";
 
 class Timeline extends Component {
   componentDidMount() {
@@ -14,19 +14,36 @@ class Timeline extends Component {
   renderTimeline = () => {
     if (!this.props.books) return <Spinner />;
     return this.props.books.map((data, i) => {
+      console.log(data);
       return (
-        <Feed key={i} style={{ borderBottom: "solid #000 2px" }}>
+        <Feed key={i} style={{ borderBottom: "solid #000 0.5px" }}>
           <Feed.Event>
-            <Feed.Label
-              image={data.userId.avatar ? data.userId.avatar : defaultImage}
-              style={{ backgroundColor: "black" }}
-            />
+            <Feed.Label>
+              <img
+                src={
+                  data.userId.avatar
+                    ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/avatar/" +
+                      data.userId.avatar
+                    : defaultImage
+                }
+                alt={data.name}
+              />
+            </Feed.Label>
             <Feed.Content>
               <Feed.Summary>
-                <a>{data.userId.name}</a> added "{data.name}"
+                <span style={{ color: "#3EA4E3" }}>{data.userId.name}</span>{" "}
+                added "{data.name}"
               </Feed.Summary>
               <Feed.Extra images>
-                <img src={data.image} />
+                <img
+                  src={
+                    data.image
+                      ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                        data.image
+                      : ""
+                  }
+                  alt={data.name}
+                />
               </Feed.Extra>
               <Feed.Date>{data.createdAt}</Feed.Date>
             </Feed.Content>

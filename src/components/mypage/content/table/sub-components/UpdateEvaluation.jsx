@@ -3,10 +3,12 @@ import { Button, Popup, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateEvaluation } from "../../../../../actions";
 import history from "../../../../../history";
+import Spinner from "../../../../../spinner/Spinner";
 
 class UpdateEvaluation extends Component {
   state = {
-    evaluation: ""
+    evaluation: "",
+    loading: false
   };
 
   handleChange = event => {
@@ -15,18 +17,27 @@ class UpdateEvaluation extends Component {
 
   handleSubmit = async () => {
     const { userId, bookId } = this.props;
-    const evaluation = this.state.evaluation;
+    const { evaluation } = this.state;
+    this.setState({ loading: true });
 
-    await this.props.updateEvaluation(userId, bookId, { evaluation });
-    history.push("/books");
+    try {
+      await this.props.updateEvaluation(userId, bookId, { evaluation });
+      this.setState({ loading: false });
+      history.push("/books");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   render() {
-    return (
+    return this.state.loading ? (
+      <Spinner />
+    ) : (
       <Popup
         trigger={
           <Button circular icon="star outline" color="yellow" size="mini" />
         }
+        pinned
         flowing
         hoverable
       >

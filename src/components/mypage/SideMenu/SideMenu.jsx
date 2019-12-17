@@ -60,11 +60,7 @@ class SideMenu extends Component {
 
   handleSignout = async () => {
     await this.props.signout();
-    try {
-      history.push("/");
-    } catch (e) {
-      console.log(e);
-    }
+    history.push("/");
   };
 
   renderMenu = () => {

@@ -14,7 +14,6 @@ class CreateBook extends Component {
     price: "",
     page_nums: "",
     publish: false,
-    file: null,
     errors: []
   };
 
@@ -144,7 +143,6 @@ class CreateBook extends Component {
     </Grid>
   );
   render() {
-    console.log(this.state.file);
     return <div>{this.renderForm()}</div>;
   }
 }

@@ -4,7 +4,7 @@ import { api } from "../api";
 // auth
 export const signup = formValues => async dispatch => {
   const response = await api.post("/api/signup", formValues);
-  dispatch({ type: actionTypes.SIGNIN_USER, payload: response.data });
+  dispatch({ type: actionTypes.SIGNUP_USER, payload: response.data });
 };
 
 export const signin = formValues => async dispatch => {
@@ -110,7 +110,6 @@ export const searchBooks = (userId, params) => async dispatch => {
   const response = await api.get(
     `/api/books/search/${userId}?search=${params}`
   );
-  console.log(response.data);
   dispatch({ type: actionTypes.SEARCH_BOOKS, payload: response.data });
 };
 

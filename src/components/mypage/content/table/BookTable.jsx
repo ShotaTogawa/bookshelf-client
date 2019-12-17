@@ -10,11 +10,11 @@ import {
   tableHeaderReading,
   tableHeaderRead
 } from "../../../../utils/variables";
-import { Table, Menu, Grid } from "semantic-ui-react";
+import { Table, Menu, Grid, Button } from "semantic-ui-react";
 import Spinner from "../../../../spinner/Spinner";
 
 class BookTable extends Component {
-  state = { activeItem: "beforeReading", skip: 0, loading: false };
+  state = { activeItem: "beforeReading", skip: 0, loadNum: 5, loading: false };
 
   componentDidMount() {
     const local = JSON.parse(localStorage.getItem("user"));
@@ -94,13 +94,24 @@ class BookTable extends Component {
               <Table.Row>{this.renderTableHeader()}</Table.Row>
             </Table.Header>
             {this.state.activeItem === "reading" ? (
-              <Reading books={this.props.books} />
+              <Reading books={this.props.books} loadNum={this.state.loadNum} />
             ) : this.state.activeItem === "read" ? (
-              <Read books={this.props.books} />
+              <Read books={this.props.books} loadNum={this.state.loadNum} />
             ) : (
-              <BeforeReading books={this.props.books} />
+              <BeforeReading
+                books={this.props.books}
+                loadNum={this.state.loadNum}
+              />
             )}
           </Table>
+          <Button
+            inverted
+            color="green"
+            onClick={() => this.setState({ loadNum: this.state.loadNum + 5 })}
+            size="tiny"
+          >
+            more...
+          </Button>
         </Grid.Column>
       </Grid>
     );

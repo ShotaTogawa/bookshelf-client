@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/type";
 import setAuthToken from "../utils/setAuthToken";
+import history from "../history";
 
 const initialUser = {
   user: {}
@@ -21,6 +22,7 @@ const user_reducer = (state = initialUser, action) => {
       };
     case actionTypes.SIGNOUT_USER:
       localStorage.removeItem("user");
+      history.push("/");
       return {
         ...state
       };

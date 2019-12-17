@@ -7,7 +7,6 @@ import { menus } from "../../../utils/variables";
 import { Grid } from "semantic-ui-react";
 import { signout, setCurrentUser } from "../../../actions";
 import ImageModal from "../../mypage/content/table/sub-components/ImageModal";
-import history from "../../../history";
 
 class SideMenu extends Component {
   state = {
@@ -60,7 +59,6 @@ class SideMenu extends Component {
 
   handleSignout = async () => {
     await this.props.signout();
-    history.push("/");
   };
 
   renderMenu = () => {

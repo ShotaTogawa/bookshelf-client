@@ -43,7 +43,7 @@ class SearchBook extends Component {
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <input
-                  class="fas"
+                  className="fas"
                   name="searchValue"
                   type="search"
                   placeholder="Search Book"
@@ -58,7 +58,7 @@ class SearchBook extends Component {
                     marginRight: "10px"
                   }}
                 />
-                <Button circular icon="fas fa-search" color="teal" />
+                <Button circular icon="search" color="teal" />
               </Form.Field>
             </Form>
             {!this.props.searchedBooks ? (

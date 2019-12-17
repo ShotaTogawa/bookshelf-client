@@ -35,15 +35,17 @@ class Timeline extends Component {
                 added "{data.name}"
               </Feed.Summary>
               <Feed.Extra images>
-                <img
-                  src={
-                    data.image
-                      ? "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
-                        data.image
-                      : ""
-                  }
-                  alt={data.name}
-                />
+                {data.image ? (
+                  <img
+                    src={
+                      "https://bookshelf-bucket.s3-us-west-2.amazonaws.com/image/" +
+                      data.image
+                    }
+                    alt={data.name}
+                  />
+                ) : (
+                  ""
+                )}
               </Feed.Extra>
               <Feed.Date>{data.createdAt}</Feed.Date>
             </Feed.Content>

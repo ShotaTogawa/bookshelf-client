@@ -14,7 +14,7 @@ class Reading extends Component {
     if (!books) {
       return <Spinner />;
     }
-    return books.map(data => {
+    return books.slice(0, this.props.loadNum).map(data => {
       console.log(data);
       return (
         <Table.Row key={data._id}>
